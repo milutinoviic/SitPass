@@ -1,0 +1,58 @@
+package com.example.sitpassbek.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Entity
+@Data
+public class Facility {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String description;
+
+    @Column(nullable = false)
+    private LocalDate createdAt;
+
+    @Column(nullable = false)
+    private String address;
+
+    @Column(nullable = false)
+    private String city;
+
+    private Double totalRating;
+
+    private Boolean active;
+
+    private boolean isDeleted;
+
+    @OneToMany(mappedBy = "facility")
+    private List<Exercise> exercises;
+
+    @OneToMany(mappedBy = "facility")
+    private List<Image> images;
+
+    @OneToMany(mappedBy = "facility")
+    private List<Description> descriptions;
+
+    @ManyToMany(mappedBy = "facilities", cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SELECT)
+    private List<Discipline> disciplines;
+
+    @OneToMany(mappedBy = "facility")
+    private List<WorkDay> workDays;
+
+    @OneToMany(mappedBy = "facility")
+    private List<Manages> manages;
+}
