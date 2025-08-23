@@ -1,9 +1,10 @@
 package com.example.sitpassbek.controller;
 
 
-import com.example.sitpassbek.dto.userDTO.CreateUserDTO;
-import com.example.sitpassbek.dto.userDTO.UserDTO;
+import com.example.sitpassbek.dto.user.CreateUserDTO;
+import com.example.sitpassbek.dto.user.UserDTO;
 import com.example.sitpassbek.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class UserController {
     }
 
     @PostMapping("/createUser")
-    public ResponseEntity<UserDTO> createUser(@RequestBody CreateUserDTO dto) {
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody CreateUserDTO dto) {
 
         UserDTO createdUser = userService.createUser(dto);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);

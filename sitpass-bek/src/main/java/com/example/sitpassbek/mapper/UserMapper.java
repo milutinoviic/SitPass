@@ -1,6 +1,6 @@
 package com.example.sitpassbek.mapper;
 
-import com.example.sitpassbek.dto.userDTO.UserDTO;
+import com.example.sitpassbek.dto.user.UserDTO;
 import com.example.sitpassbek.model.User;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
 package com.example.sitpassbek.mapper;
 
-import com.example.sitpassbek.dto.workdayDTO.WorkDayDTO;
+import com.example.sitpassbek.dto.workday.WorkDayDTO;
 import com.example.sitpassbek.model.WorkDay;
 import org.springframework.stereotype.Component;
 

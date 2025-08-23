@@ -56,3 +56,11 @@
 --              false,
 --              1
 --          );
+
+
+INSERT INTO discipline (id, name, is_deleted) VALUES
+                                                  (1, 'Yoga', false),
+                                                  (2, 'Pilates', false),
+                                                  (3, 'Crossfit', false),
+                                                  (4, 'Zumba', false),
+                                                  (5, 'Spinning', false);

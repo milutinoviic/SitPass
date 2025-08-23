@@ -1,8 +1,7 @@
 package com.example.sitpassbek.service;
 
-import com.example.sitpassbek.dto.userDTO.CreateUserDTO;
-import com.example.sitpassbek.dto.userDTO.UpdateUserDTO;
-import com.example.sitpassbek.dto.userDTO.UserDTO;
+import com.example.sitpassbek.dto.user.CreateUserDTO;
+import com.example.sitpassbek.dto.user.UserDTO;
 
 public interface UserService {
 

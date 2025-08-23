@@ -1,7 +1,7 @@
 package com.example.sitpassbek.service.Impl;
 
-import com.example.sitpassbek.dto.userDTO.CreateUserDTO;
-import com.example.sitpassbek.dto.userDTO.UserDTO;
+import com.example.sitpassbek.dto.user.CreateUserDTO;
+import com.example.sitpassbek.dto.user.UserDTO;
 import com.example.sitpassbek.mapper.UserMapper;
 import com.example.sitpassbek.model.User;
 import com.example.sitpassbek.repository.UserRepository;

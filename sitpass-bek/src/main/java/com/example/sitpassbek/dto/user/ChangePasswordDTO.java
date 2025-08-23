@@ -1,4 +1,4 @@
-package com.example.sitpassbek.dto.userDTO;
+package com.example.sitpassbek.dto.user;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

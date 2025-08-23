@@ -20,6 +20,7 @@ public interface WorkDayRepository extends JpaRepository<WorkDay, Long> {
     Optional<WorkDay> findTopByFacilityAndDayAndValidFromLessThanEqualAndIsDeletedFalseOrderByValidFromDesc(
             Facility facility, DayOfWeekEnum day, LocalDate date);
 
-    List<WorkDay> findByFacilityAndIsDeletedFalse(Facility facility);
+    Optional<WorkDay> findByIdAndIsDeletedFalse(Long id);
+
 }
 
