@@ -1,4 +1,4 @@
-//package com.example.sitpassbek.controller;
+//package com.example.sitpassbek.FolderEx;
 //
 //
 //import com.example.sitpassbek.model.Administrator;
@@ -25,24 +25,24 @@
 //
 //    @Override
 //    public void run(String... args) throws Exception {
-////        User user = new User();
-////        user.setEmail("test@example.com");
-////        user.setPassword(passwordEncoder.encode("password123"));
-////        user.setAddress("KKKKK");
-////        user.setCreatedAt(LocalDate.now());
-////
-////
-////        userRepository.save(user);
-//
-//
-//        Administrator user = new Administrator();
-//        user.setEmail("test123@example.com");
+//        User user = new User();
+//        user.setEmail("test@example.com");
 //        user.setPassword(passwordEncoder.encode("password123"));
 //        user.setAddress("KKKKK");
 //        user.setCreatedAt(LocalDate.now());
 //
 //
 //        userRepository.save(user);
+//
+//
+//        Administrator user1 = new Administrator();
+//        user1.setEmail("test123@example.com");
+//        user1.setPassword(passwordEncoder.encode("password123"));
+//        user1.setAddress("KKKKK");
+//        user1.setCreatedAt(LocalDate.now());
+//
+//
+//        userRepository.save(user1);
 //
 //
 //

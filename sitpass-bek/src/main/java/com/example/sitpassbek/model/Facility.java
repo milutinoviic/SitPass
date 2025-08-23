@@ -46,13 +46,22 @@ public class Facility {
     @OneToMany(mappedBy = "facility")
     private List<Description> descriptions;
 
-    @ManyToMany(mappedBy = "facilities", cascade = CascadeType.ALL)
-    @Fetch(FetchMode.SELECT)
+    @ManyToMany
+    @JoinTable(
+            name = "facility_discipline",
+            joinColumns = @JoinColumn(name = "facility_id"),
+            inverseJoinColumns = @JoinColumn(name = "discipline_id")
+    )
     private List<Discipline> disciplines;
+
 
     @OneToMany(mappedBy = "facility")
     private List<WorkDay> workDays;
 
     @OneToMany(mappedBy = "facility")
     private List<Manages> manages;
+
+    @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews;
+
 }

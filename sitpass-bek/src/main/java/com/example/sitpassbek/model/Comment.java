@@ -2,11 +2,13 @@ package com.example.sitpassbek.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Data
+@SQLRestriction("is_deleted = 'false'")
 public class Comment {
 
     @Id
@@ -23,6 +25,10 @@ public class Comment {
 
     @ManyToOne
     private User user;
+
+    @OneToOne
+    @JoinColumn(name = "review_id", nullable = false)
+    private Review review;
 
     @ManyToOne
     private Comment repliesTo;

@@ -17,7 +17,8 @@ public class Discipline {
 
     private boolean isDeleted;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "disciplines")
     private List<Facility> facilities;
+
 
 }
