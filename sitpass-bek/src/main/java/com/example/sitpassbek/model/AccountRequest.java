@@ -32,7 +32,6 @@ public class AccountRequest {
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
 
-    @Column(nullable = false)
     private String rejectionReason;
 
 }

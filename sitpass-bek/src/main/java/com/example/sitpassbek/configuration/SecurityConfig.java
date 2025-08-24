@@ -38,6 +38,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request.requestMatchers("/auth/**", "/public/**").permitAll()
                         .requestMatchers("/api/test/**").hasAnyAuthority("User", "Admin")
                         .requestMatchers("/api/users/**").hasAnyAuthority("User", "Admin")
+                        .requestMatchers("/api/account-requests/*/approve").hasAnyAuthority( "Admin")
+                        .requestMatchers("/api/account-requests/reject").hasAnyAuthority( "Admin")
+                        .requestMatchers("/api/account-requests/createAccountRequest/**","/public/**").permitAll()
+                        .requestMatchers("/api/account-requests/getAllAccountRequest").hasAnyAuthority( "Admin")
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(
