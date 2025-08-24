@@ -15,6 +15,7 @@ public class FacilityDTO {
     private String description;
     private String address;
     private String city;
+    private Double totalRating;
     private LocalDate createdAt;
     private Boolean active;
 }

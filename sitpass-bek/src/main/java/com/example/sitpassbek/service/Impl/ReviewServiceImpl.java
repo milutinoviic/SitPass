@@ -77,6 +77,8 @@ public class ReviewServiceImpl implements ReviewService {
 
             savedComment = commentRepository.save(comment);
         }
+        recalculateTotalRating(review.getFacility());
+
         return reviewMapper.toDto(savedReview);
     }
 
@@ -103,6 +105,9 @@ public class ReviewServiceImpl implements ReviewService {
 
         review.setDeleted(true);
         reviewRepository.save(review);
+
+        recalculateTotalRating(review.getFacility());
+
     }
 
     @Override
@@ -115,6 +120,28 @@ public class ReviewServiceImpl implements ReviewService {
 
         return reviewMapper.toDtoList(reviewList);
     }
+
+    private void recalculateTotalRating(Facility facility) {
+        if (facility == null) return;
+
+        List<Review> activeReviews = reviewRepository.findAllByFacilityAndIsDeletedFalse(facility);
+
+        double total = 0;
+        int count = 0;
+
+        for (Review r : activeReviews) {
+            Rate rate = r.getRate();
+            if (rate != null && !rate.isDeleted()) {
+                double avg = (rate.getEquipment() + rate.getStaff() + rate.getHygiene() + rate.getSpace()) / 4.0;
+                total += avg;
+                count++;
+            }
+        }
+
+        facility.setTotalRating(count > 0 ? total / count : 0.0);
+        facilityRepository.save(facility);
+    }
+
 
 
 

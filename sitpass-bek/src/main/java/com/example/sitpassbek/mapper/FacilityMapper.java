@@ -14,6 +14,7 @@ public class FacilityMapper {
                 facility.getDescription(),
                 facility.getAddress(),
                 facility.getCity(),
+                facility.getTotalRating(),
                 facility.getCreatedAt(),
                 facility.getActive()
         );
