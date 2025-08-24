@@ -20,6 +20,11 @@ public class Manages {
     private boolean isDeleted;
 
     @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name="facility_id", nullable=false)
     private Facility facility;
 
 
