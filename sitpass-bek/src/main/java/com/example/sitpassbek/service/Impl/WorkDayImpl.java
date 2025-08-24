@@ -83,6 +83,7 @@ public class WorkDayImpl implements WorkDayService {
                     .findByFacilityAndValidFromAndDayAndIsDeletedFalse(facility, currentDate, dayEnum);
 
             if (current.isPresent()) {
+
                 result.add(current.get());
             } else {
 
@@ -90,6 +91,7 @@ public class WorkDayImpl implements WorkDayService {
                         .findTopByFacilityAndDayAndValidFromLessThanEqualAndIsDeletedFalseOrderByValidFromDesc(
                                 facility, dayEnum, currentDate
                         );
+
                 lastKnown.ifPresent(result::add);
             }
         }

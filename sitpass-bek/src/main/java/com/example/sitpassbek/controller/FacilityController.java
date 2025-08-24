@@ -52,8 +52,8 @@ public class FacilityController {
     }
 
     @PostMapping("createReview/{facilityId}")
-    public ResponseEntity<ReviewDTO> createReview(@PathVariable Long facilityId,@RequestBody CreateReviewDTO request) {
-        ReviewDTO review = reviewService.createReviewWithRateAndOptionalComment(facilityId,request);
+    public ResponseEntity<ReviewDTO> createReview(@PathVariable Long facilityId, @RequestBody CreateReviewDTO request) {
+        ReviewDTO review = reviewService.createReviewWithRateAndOptionalComment(facilityId, request);
         return ResponseEntity.ok(review);
     }
 

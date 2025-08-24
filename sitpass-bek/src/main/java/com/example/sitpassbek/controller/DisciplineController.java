@@ -1,8 +1,8 @@
 package com.example.sitpassbek.controller;
 
-import com.example.sitpassbek.dto.disciplineFacility.DisciplineToFromFacility;
 import com.example.sitpassbek.dto.discipline.CreateDiscipline;
 import com.example.sitpassbek.dto.discipline.DisciplineDTO;
+import com.example.sitpassbek.dto.disciplineFacility.DisciplineToFromFacility;
 import com.example.sitpassbek.service.DisciplineService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -41,11 +41,8 @@ public class ReviewServiceImpl implements ReviewService {
         Facility facility = facilityRepository.findByIdAndIsDeletedFalse(facilityId)
                 .orElseThrow(() -> new RuntimeException("Facility not found with id " + facilityId));
 
-        User user = userRepository.findByIdAndIsDeletedFalse(createReviewDTO.getUserId());
-
-        if(user == null) {
-            throw new RuntimeException("User not found with id " + createReviewDTO.getUserId());
-        }
+        User user = userRepository.findByIdAndIsDeletedFalse(createReviewDTO.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found with id "+ createReviewDTO.getUserId()));
 
 
         Rate rate = new Rate();
