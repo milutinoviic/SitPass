@@ -1,0 +1,19 @@
+export enum DayOfWeekEnum {
+  MONDAY = 'MONDAY',
+  TUESDAY = 'TUESDAY',
+  WEDNESDAY = 'WEDNESDAY',
+  THURSDAY = 'THURSDAY',
+  FRIDAY = 'FRIDAY',
+  SATURDAY = 'SATURDAY',
+  SUNDAY = 'SUNDAY'
+}
+
+
+export interface WorkDay {
+  id: number;
+  validFrom: string;  
+  day: DayOfWeekEnum; 
+  from: string;       
+  until: string; 
+}
+

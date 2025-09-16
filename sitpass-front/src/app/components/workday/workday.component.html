@@ -1,0 +1,14 @@
+<div class="workdays-container">
+  <h2>Radno vreme</h2>
+
+  <div *ngIf="workdays.length > 0" class="workdays-list">
+    <div *ngFor="let wd of workdays" class="workday-item">
+      <span class="day">{{ dayLabels[wd.day] || wd.day }}</span>
+      <span class="time">
+        {{ wd.from ? (wd.from | date:'HH:mm') : '-' }} - {{ wd.until ? (wd.until | date:'HH:mm') : '-' }}
+      </span>
+    </div>
+  </div>
+
+  <p *ngIf="workdays.length === 0" class="no-data">Nema dostupnih radnih dana za ovu nedelju.</p>
+</div>

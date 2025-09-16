@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/workdays")
+@CrossOrigin(origins = "http://localhost:4200")
 public class WorkDayController {
 
     private final WorkDayService workDayService;

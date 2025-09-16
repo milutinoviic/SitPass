@@ -7,6 +7,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { authInterceptor } from './core/interceptor/auth.interceptor';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { WorkdayComponent } from './components/workday/workday.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +17,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HomePageComponent,
     ForbiddenComponent,
     NavbarComponent,
+    WorkdayComponent,
    
   ],
   imports: [
@@ -21,7 +25,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     AppRoutingModule,
     LoginComponent
   ],
-  providers: [],
+  providers: [ provideHttpClient(withInterceptors([authInterceptor])) ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
