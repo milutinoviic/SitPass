@@ -1,0 +1,19 @@
+.disciplines-container {
+  display: flex;
+  flex-wrap: wrap; /* da prelaze u novi red ako nema mesta */
+  gap: 10px; /* razmak između discipline */
+}
+
+.discipline-item {
+  background-color: #f0f0f0; /* svetlo siva pozadina */
+  padding: 8px 16px; /* unutrašnji razmak */
+  border-radius: 20px; /* zaobljeni krajevi */
+  font-size: 14px;
+  font-weight: 500;
+  cursor: default;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #d9eaff; /* blagi hover efekat */
+  }
+}

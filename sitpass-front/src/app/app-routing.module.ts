@@ -6,6 +6,9 @@ import { LoginGuard } from './core/guard/login.guard';
 import { RoleGuard } from './core/guard/role.guard';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
 import { WorkdayComponent } from './components/workday/workday.component';
+import { DisciplineComponent } from './components/discipline/discipline.component';
+import { FacilityDetailComponent } from './pages/facility-detail/facility-detail.component';
+import { ReviewComponent } from './components/review/review.component';
 
 
 const routes: Routes = [
@@ -13,7 +16,10 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent,canActivate:[RoleGuard],data: { expectedRoles: ['Admin', 'User'] }},
   { path: 'forbidden', component: ForbiddenComponent},
-   { path: 'workday', component: WorkdayComponent,canActivate:[RoleGuard],data: { expectedRoles: ['Admin', 'User'] }},
+  { path: 'workday', component: WorkdayComponent,canActivate:[RoleGuard],data: { expectedRoles: ['Admin', 'User'] }},
+  { path: 'discipline', component:DisciplineComponent,canActivate:[RoleGuard],data: { expectedRoles: ['Admin', 'User'] }},
+  { path: 'facilityDetail', component: FacilityDetailComponent,canActivate:[RoleGuard],data: { expectedRoles: ['Admin', 'User'] }},
+  { path: 'review', component: ReviewComponent,canActivate:[RoleGuard],data: { expectedRoles: ['Admin', 'User'] }},
   
 ];
 

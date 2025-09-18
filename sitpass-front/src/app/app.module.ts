@@ -10,6 +10,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { authInterceptor } from './core/interceptor/auth.interceptor';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { WorkdayComponent } from './components/workday/workday.component';
+import { DisciplineComponent } from './components/discipline/discipline.component';
+import { FacilityDetailComponent } from './pages/facility-detail/facility-detail.component';
+import { ReviewComponent } from './components/review/review.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { WorkdayComponent } from './components/workday/workday.component';
     ForbiddenComponent,
     NavbarComponent,
     WorkdayComponent,
+    DisciplineComponent,
+    FacilityDetailComponent,
+    ReviewComponent,
    
   ],
   imports: [

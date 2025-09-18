@@ -1,0 +1,25 @@
+<div *ngIf="loading">Loading reviews...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div *ngIf="!loading && reviews.length === 0">
+  No reviews found for this facility.
+</div>
+
+<div *ngIf="reviews.length > 0">
+  <div *ngFor="let review of reviews" class="review-card">
+    <p><strong>User ID:</strong> {{ review.userId }}</p>
+    <p><strong>Created At:</strong> {{ review.createdAt | date:'short' }}</p>
+    <p><strong>Exercise Count:</strong> {{ review.exerciseCount }}</p>
+    <p><strong>Rate:</strong>
+      Equipment: {{ review.rate.equipment }},
+      Staff: {{ review.rate.staff }},
+      Hygiene: {{ review.rate.hygiene }},
+      Space: {{ review.rate.space }}
+    </p>
+    <div *ngIf="review.comment">
+      <p><strong>Comment:</strong> {{ review.comment.text }}</p>
+      <p><em>Created by user {{ review.comment.userId }} at {{ review.comment.createdAt | date:'short' }}</em></p>
+    </div>
+    <hr />
+  </div>
+</div>

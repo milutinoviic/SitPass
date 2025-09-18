@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DayOfWeekEnum, WorkDay } from '../../types/workday.type';
 import { WorkdayService } from '../../services/workday/workday.service';
 
@@ -10,6 +10,7 @@ import { WorkdayService } from '../../services/workday/workday.service';
 })
 export class WorkdayComponent {
 
+  @Input() facilityId!: number;  
   workdays: WorkDay[] = [];
 
   dayLabels: Record<DayOfWeekEnum, string> = {
@@ -25,8 +26,7 @@ export class WorkdayComponent {
   constructor(private workDayService: WorkdayService) {}
 
   ngOnInit(): void {
-    const facilityId = 1;
-    this.workDayService.getCurrentWeek(facilityId).subscribe({
+    this.workDayService.getCurrentWeek(this.facilityId).subscribe({
       next: (data) => this.workdays = data,
       error: (err) => console.error('Greška pri dohvatanju rasporeda:', err)
     });
