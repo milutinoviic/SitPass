@@ -15,4 +15,6 @@ public interface DisciplineRepository extends JpaRepository<Discipline, Long> {
 
     List<Discipline> findAllByIdInAndIsDeletedFalse(List<Long> ids);
 
+    List<Discipline> findByFacilitiesIdAndIsDeletedFalse(Long facilityId);
+
 }

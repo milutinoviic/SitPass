@@ -18,4 +18,6 @@ public interface DisciplineService {
 
     void removeDisciplineListFromFacility(DisciplineToFromFacility request);
 
+    List<DisciplineDTO> getDisciplinesByFacilityId(Long facilityId);
+
 }

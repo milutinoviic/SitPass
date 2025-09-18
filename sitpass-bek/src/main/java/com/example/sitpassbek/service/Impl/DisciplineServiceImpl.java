@@ -122,6 +122,13 @@ public class DisciplineServiceImpl implements DisciplineService {
         facilityRepository.save(facility);
     }
 
+    @Override
+    public List<DisciplineDTO> getDisciplinesByFacilityId(Long facilityId) {
+
+        List<Discipline> disciplines = disciplineRepository.findByFacilitiesIdAndIsDeletedFalse(facilityId);
+        return disciplineMapper.toDTOList(disciplines);
+    }
+
 
 
 

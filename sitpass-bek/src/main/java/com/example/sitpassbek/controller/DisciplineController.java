@@ -27,6 +27,11 @@ public class DisciplineController {
         return disciplineService.getDisciplineList();
     }
 
+    @GetMapping("/facility/{facilityId}")
+    public List<DisciplineDTO> getDisciplinesByFacilityId(@PathVariable Long facilityId) {
+        return disciplineService.getDisciplinesByFacilityId(facilityId);
+    }
+
     @PostMapping("/createDiscipline")
     public DisciplineDTO createDiscipline(@Valid @RequestBody CreateDiscipline createDiscipline) {
         return disciplineService.createDiscipline(createDiscipline);
@@ -49,5 +54,4 @@ public class DisciplineController {
         disciplineService.removeDisciplineListFromFacility(request);
         return ResponseEntity.ok().build();
     }
-
 }
