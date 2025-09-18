@@ -13,6 +13,7 @@ import { WorkdayComponent } from './components/workday/workday.component';
 import { DisciplineComponent } from './components/discipline/discipline.component';
 import { FacilityDetailComponent } from './pages/facility-detail/facility-detail.component';
 import { ReviewComponent } from './components/review/review.component';
+import { FacilityInfoComponent } from './components/facility-info/facility-info.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ReviewComponent } from './components/review/review.component';
     DisciplineComponent,
     FacilityDetailComponent,
     ReviewComponent,
+    FacilityInfoComponent,
    
   ],
   imports: [

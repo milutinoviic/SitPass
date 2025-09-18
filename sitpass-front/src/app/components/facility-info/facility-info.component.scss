@@ -1,0 +1,76 @@
+.facility-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin: 20px 0;
+  max-width: 600px;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+
+    h2 {
+      margin: 0;
+      font-size: 1.6rem;
+      color: #333;
+    }
+
+    .status {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+
+      &.active {
+        background-color: #4CAF50;
+      }
+
+      &.inactive {
+        background-color: #F44336;
+      }
+    }
+  }
+
+  .description {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #666;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+
+      strong {
+        color: #333;
+      }
+    }
+  }
+
+  &.loading, &.error {
+    text-align: center;
+    font-weight: 500;
+    color: #777;
+  }
+
+  &.error {
+    color: #F44336;
+  }
+}

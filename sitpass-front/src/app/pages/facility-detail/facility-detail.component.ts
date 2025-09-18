@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-facility-detail',
@@ -8,6 +9,18 @@ import { Component } from '@angular/core';
 })
 export class FacilityDetailComponent {
 
-   facilityId = 1; 
+  
+  facilityId!: number;
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const idParam = params.get('id');
+      if (idParam) {
+        this.facilityId = Number(idParam);
+      }
+    });
+  }
 
 }

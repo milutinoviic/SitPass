@@ -9,6 +9,7 @@ import { WorkdayComponent } from './components/workday/workday.component';
 import { DisciplineComponent } from './components/discipline/discipline.component';
 import { FacilityDetailComponent } from './pages/facility-detail/facility-detail.component';
 import { ReviewComponent } from './components/review/review.component';
+import { FacilityInfoComponent } from './components/facility-info/facility-info.component';
 
 
 const routes: Routes = [
@@ -18,8 +19,9 @@ const routes: Routes = [
   { path: 'forbidden', component: ForbiddenComponent},
   { path: 'workday', component: WorkdayComponent,canActivate:[RoleGuard],data: { expectedRoles: ['Admin', 'User'] }},
   { path: 'discipline', component:DisciplineComponent,canActivate:[RoleGuard],data: { expectedRoles: ['Admin', 'User'] }},
-  { path: 'facilityDetail', component: FacilityDetailComponent,canActivate:[RoleGuard],data: { expectedRoles: ['Admin', 'User'] }},
+  { path: 'facilityDetail/:id', component: FacilityDetailComponent,canActivate:[RoleGuard],data: { expectedRoles: ['Admin', 'User'] }},
   { path: 'review', component: ReviewComponent,canActivate:[RoleGuard],data: { expectedRoles: ['Admin', 'User'] }},
+  { path: 'facilityInfo', component: FacilityInfoComponent,canActivate:[RoleGuard],data: { expectedRoles: ['Admin', 'User'] }},
   
 ];
 

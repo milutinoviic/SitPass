@@ -1,0 +1,31 @@
+<div *ngIf="loading" class="facility-card loading">
+  Loading facility info...
+</div>
+
+<div *ngIf="error" class="facility-card error">
+  {{ error }}
+</div>
+
+<div *ngIf="facility" class="facility-card">
+  <div class="header">
+    <h2>{{ facility.name }}</h2>
+    <span class="status" [class.active]="facility.active" [class.inactive]="!facility.active">
+      {{ facility.active ? 'Active' : 'Inactive' }}
+    </span>
+  </div>
+
+  <p class="description">{{ facility.description }}</p>
+
+  <div class="details">
+    <div>
+      <strong>Address:</strong> {{ facility.address }}, {{ facility.city }}
+    </div>
+    <div>
+      <strong>Total Rating:</strong> {{ facility.totalRating | number:'1.1-1' }}
+    </div>
+    <div>
+      <strong>Created At:</strong> {{ facility.createdAt | date:'mediumDate' }}
+    </div>
+  </div>
+</div>
+
