@@ -30,6 +30,18 @@ public class FacilityController {
         this.reviewService = reviewService;
     }
 
+    @GetMapping("/info/{id}")
+    public ResponseEntity<FacilityDTO> getFacility(@PathVariable Long id) {
+        FacilityDTO facility = facilityService.getFacility(id);
+        return ResponseEntity.ok(facility);
+    }
+
+    @GetMapping("/facility/{facilityId}")
+    public ResponseEntity<List<ReviewDTO>> getReviewsForFacility(@PathVariable Long facilityId) {
+        List<ReviewDTO> reviews = reviewService.getAllReviewsForFacility(facilityId);
+        return ResponseEntity.ok(reviews);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFacility(@PathVariable Long id) {
         facilityService.deleteFacility(id);
@@ -61,12 +73,6 @@ public class FacilityController {
     public ResponseEntity<String> deleteReview(@PathVariable Long reviewId) {
         reviewService.deleteReview(reviewId);
         return ResponseEntity.ok("Review, rate and associated comments have been logically deleted.");
-    }
-
-    @GetMapping("/facility/{facilityId}")
-    public ResponseEntity<List<ReviewDTO>> getReviewsForFacility(@PathVariable Long facilityId) {
-        List<ReviewDTO> reviews = reviewService.getAllReviewsForFacility(facilityId);
-        return ResponseEntity.ok(reviews);
     }
 
 }

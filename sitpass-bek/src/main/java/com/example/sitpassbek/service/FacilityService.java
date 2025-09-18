@@ -11,4 +11,6 @@ public interface FacilityService {
     FacilityDTO updateFacility(Long id, UpdateFacilityDTO dto);
 
     void deleteFacility(Long facilityId);
+
+    FacilityDTO getFacility(Long id);
 }

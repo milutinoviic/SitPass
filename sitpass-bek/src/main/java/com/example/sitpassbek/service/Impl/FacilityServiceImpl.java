@@ -63,5 +63,13 @@ public class FacilityServiceImpl implements FacilityService {
         return facilityMapper.toDTO(updated);
     }
 
+    @Override
+    public FacilityDTO getFacility(Long id) {
+        Facility facility = facilityRepository.findByIdAndIsDeletedFalse(id)
+                .orElseThrow(() -> new RuntimeException("Facility not found or deleted"));
+
+        return facilityMapper.toDTO(facility);
+    }
+
 }
 
