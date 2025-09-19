@@ -1,36 +1,12 @@
-<div class="exercise-form">
-  <h2>Create Exercise</h2>
+<div class="container">
+  <h1>Create Exercise</h1>
+  <form [formGroup]="form" (ngSubmit)="createExercise()">
+    <label for="from">Start Date and Time:</label>
+    <input type="datetime-local" id="from" formControlName="startDateTime" required>
 
-  <form (ngSubmit)="create()" #exerciseForm="ngForm">
-    <div class="form-group">
-      <label>From:</label>
-      <input
-        type="datetime-local"
-        [(ngModel)]="newExercise.from"
-        name="from"
-        required
-      />
-    </div>
+    <label for="until">End Date and Time:</label>
+    <input type="datetime-local" id="until" formControlName="endDateTime" required>
 
-    <div class="form-group">
-      <label>Until:</label>
-      <input
-        type="datetime-local"
-        [(ngModel)]="newExercise.until"
-        name="until"
-        required
-      />
-    </div>
-
-    <button type="submit" [disabled]="loading || !exerciseForm.form.valid">
-      {{ loading ? 'Saving...' : 'Create' }}
-    </button>
+    <button type="submit" [disabled]="form.invalid">Submit</button>
   </form>
-
-  <div *ngIf="createdExercise" class="result">
-    <h3>Created Exercise</h3>
-    <p><strong>ID:</strong> {{ createdExercise.id }}</p>
-    <p><strong>From:</strong> {{ createdExercise.from }}</p>
-    <p><strong>Until:</strong> {{ createdExercise.until }}</p>
-  </div>
 </div>

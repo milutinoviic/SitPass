@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CreateExercise, Exercise } from '../../types/exercise.type';
 import { ExerciseService } from '../../services/exercise/exercise.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-exercise',
@@ -12,44 +13,68 @@ export class ExerciseComponent {
  
   @Input() facilityId!: number;
 
-  newExercise: CreateExercise = {
-    userId: 1,
-    facilityId: 0,
-    from: '',
-    until: ''
-  };
+  form!: FormGroup;
 
-  createdExercise?: Exercise;
-  loading = false;
+  constructor(
+    private fb: FormBuilder,
+    private exerciseService: ExerciseService
+  ) {}
 
-  constructor(private exerciseService: ExerciseService) {}
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      startDateTime: ['', Validators.required],
+      endDateTime: ['', Validators.required]
+    });
+  }
 
-  create() {
-    if (!this.newExercise.from || !this.newExercise.until) {
-      alert('Please fill in both From and Until!');
+  createExercise(): void {
+    if (this.form.invalid) {
+      alert('Please fill all fields.');
       return;
     }
 
-    this.loading = true;
-    this.newExercise.facilityId = this.facilityId;
+    const start = new Date(this.form.value.startDateTime);
+    const end = new Date(this.form.value.endDateTime);
+    const now = new Date();
 
-    // konvertovanje lokalnog vremena u ISO format
-    const fromDate = new Date(this.newExercise.from);
-    const untilDate = new Date(this.newExercise.until);
+    if (start < now) {
+      alert('Exercise cannot be scheduled in the past');
+      return;
+    }
 
-    // Srbija je CET/CEST, koristi lokalno vreme browsera
-    this.newExercise.from = fromDate.toISOString().slice(0, 19);
-    this.newExercise.until = untilDate.toISOString().slice(0, 19);
+    // 2️⃣ proveri trajanje
+    const minutes = (end.getTime() - start.getTime()) / (1000 * 60);
+    if (!(minutes === 60 || minutes === 90)) {
+      alert('Duration must be exactly 1h or 1.5h');
+      return;
+    }
 
-    this.exerciseService.createExercise(this.newExercise).subscribe({
-      next: (res) => {
-        this.createdExercise = res;
-        this.loading = false;
+    // 3️⃣ start minute mora biti 0 ili 30
+    const startMinute = start.getMinutes();
+    if (!(startMinute === 0 || startMinute === 30)) {
+      alert('Start time must be on the hour or half past');
+      return;
+    }
+
+    // 4️⃣ (opciono) proveri radno vreme facility-a
+    // Ovde frontend ne zna tačno schedule, backend će baciti grešku
+    // Ako želiš, možeš koristiti input od korisnika za radne sate
+
+    const exercise = {
+      from: start.toISOString(),
+      until: end.toISOString(),
+      userId: 1, // fiksno
+      facilityId: this.facilityId
+    };
+
+    this.exerciseService.createExercise(exercise).subscribe({
+      next: (data) => {
+        alert('Successfully created exercise!');
+        console.log(data);
       },
       error: (err) => {
-        console.error(err);
-        this.loading = false;
-        alert('Error creating exercise!');
+        console.error('Error creating exercise:', err);
+        alert('Failed to create exercise. ' + (err?.error?.message || ''));
       }
     });
   }

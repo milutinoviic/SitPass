@@ -15,7 +15,7 @@ import { FacilityDetailComponent } from './pages/facility-detail/facility-detail
 import { ReviewComponent } from './components/review/review.component';
 import { FacilityInfoComponent } from './components/facility-info/facility-info.component';
 import { ExerciseComponent } from './components/exercise/exercise.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,8 +35,9 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     LoginComponent,
-    FormsModule
-  ],
+    FormsModule,
+    ReactiveFormsModule
+],
   providers: [ provideHttpClient(withInterceptors([authInterceptor])) ],
   bootstrap: [AppComponent]
 })
