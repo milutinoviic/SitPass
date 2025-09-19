@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Discipline } from '../../types/discipline.type';
-import { DisciplineService } from '../../services/discipline.service';
+import { DisciplineService } from '../../services/disipline/discipline.service';
+
 
 @Component({
   selector: 'app-discipline',
@@ -11,7 +12,7 @@ import { DisciplineService } from '../../services/discipline.service';
 export class DisciplineComponent implements OnInit {
 
 
-  @Input() facilityId!: number;   // facilityId prosleđuješ spolja
+  @Input() facilityId!: number;  
   disciplines: Discipline[] = [];
   loading = false;
 
@@ -29,6 +30,8 @@ export class DisciplineComponent implements OnInit {
       next: (data) => {
         this.disciplines = data;
         this.loading = false;
+        console.log("---------------------------")
+        console.log(data)
       },
       error: (err) => {
         console.error('Error fetching disciplines:', err);

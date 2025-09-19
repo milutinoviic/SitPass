@@ -1,7 +1,7 @@
 package com.example.sitpassbek.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -9,7 +9,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Facility {
 
     @Id
@@ -64,4 +67,9 @@ public class Facility {
     @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
 
+    @Override
+    public String toString() {
+//        return super.toString();
+        return "Teretana" + this.name;
+    }
 }

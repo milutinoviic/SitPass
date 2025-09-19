@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Facility } from '../../types/facility.type';
 import { ActivatedRoute } from '@angular/router';
-import { FacilityService } from '../../services/facility.service';
+import { FacilityService } from '../../services/facility/facility.service';
 
 @Component({
   selector: 'app-facility-info',

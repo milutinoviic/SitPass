@@ -1,0 +1,36 @@
+<div class="exercise-form">
+  <h2>Create Exercise</h2>
+
+  <form (ngSubmit)="create()" #exerciseForm="ngForm">
+    <div class="form-group">
+      <label>From:</label>
+      <input
+        type="datetime-local"
+        [(ngModel)]="newExercise.from"
+        name="from"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Until:</label>
+      <input
+        type="datetime-local"
+        [(ngModel)]="newExercise.until"
+        name="until"
+        required
+      />
+    </div>
+
+    <button type="submit" [disabled]="loading || !exerciseForm.form.valid">
+      {{ loading ? 'Saving...' : 'Create' }}
+    </button>
+  </form>
+
+  <div *ngIf="createdExercise" class="result">
+    <h3>Created Exercise</h3>
+    <p><strong>ID:</strong> {{ createdExercise.id }}</p>
+    <p><strong>From:</strong> {{ createdExercise.from }}</p>
+    <p><strong>Until:</strong> {{ createdExercise.until }}</p>
+  </div>
+</div>

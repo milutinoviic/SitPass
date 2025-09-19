@@ -14,6 +14,8 @@ import { DisciplineComponent } from './components/discipline/discipline.componen
 import { FacilityDetailComponent } from './pages/facility-detail/facility-detail.component';
 import { ReviewComponent } from './components/review/review.component';
 import { FacilityInfoComponent } from './components/facility-info/facility-info.component';
+import { ExerciseComponent } from './components/exercise/exercise.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,12 +28,14 @@ import { FacilityInfoComponent } from './components/facility-info/facility-info.
     FacilityDetailComponent,
     ReviewComponent,
     FacilityInfoComponent,
+    ExerciseComponent,
    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LoginComponent
+    LoginComponent,
+    FormsModule
   ],
   providers: [ provideHttpClient(withInterceptors([authInterceptor])) ],
   bootstrap: [AppComponent]
