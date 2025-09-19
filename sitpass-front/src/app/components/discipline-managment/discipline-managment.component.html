@@ -1,0 +1,73 @@
+<div class="discipline-container">
+  <h2 class="title">Manage Disciplines</h2>
+
+  <div class="tables-wrapper">
+    <div class="card">
+      <h3 class="subtitle">Assigned Disciplines ({{ assignedDisciplines.length }})</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of assignedDisciplines">
+            <td>{{ d.name }}</td>
+            <td class="text-center">
+              <button 
+                class="btn btn-sm btn-danger"
+                (click)="selectForRemove(d)" 
+                [disabled]="disciplinesToRemove.includes(d)">
+                Remove
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3 class="subtitle">Available Disciplines ({{ availableDisciplines.length }})</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of availableDisciplines">
+            <td>{{ d.name }}</td>
+            <td class="text-center">
+              <button 
+                class="btn btn-sm btn-success"
+                (click)="selectForAdd(d)" 
+                [disabled]="disciplinesToAdd.includes(d)">
+                Add
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ACTION BUTTONS -->
+  <div class="actions">
+     <button 
+      class="btn btn-warning"
+      (click)="removeDisciplines()" 
+      [disabled]="disciplinesToRemove.length === 0">
+      ❌ Remove Selected
+    </button>
+    <button 
+      class="btn btn-primary"
+      (click)="addDisciplines()" 
+      [disabled]="disciplinesToAdd.length === 0">
+      ✅ Add Selected
+    </button>
+
+   
+  </div>
+</div>

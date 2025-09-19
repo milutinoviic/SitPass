@@ -1,0 +1,48 @@
+<div class="create-discipline-wrapper">
+  <div class="columns-container">
+    
+    <div class="left-column">
+      <h2 class="column-title">Sve discipline</h2>
+      <div *ngIf="disciplines.length > 0">
+        <ul class="discipline-list">
+          <li *ngFor="let d of disciplines" class="discipline-item">
+            <span>{{ d.name }}</span>
+            <button (click)="deleteDiscipline(d.id)" class="delete-btn material-icons">
+              delete
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="disciplines.length === 0" class="empty-msg">
+        Nema disciplina za prikaz.
+      </div>
+    </div>
+
+    <div class="right-column">
+      <h2 class="column-title">Kreiraj novu disciplinu</h2>
+
+      <form [formGroup]="disciplineForm" (ngSubmit)="onSubmit()">
+        <div class="input-group">
+          <input id="name" type="text" formControlName="name" placeholder="Unesite ime discipline" />
+          <label for="name">Ime discipline</label>
+          <p *ngIf="disciplineForm.controls['name'].invalid && disciplineForm.controls['name'].touched" class="error-msg">
+            Ime discipline je obavezno.
+          </p>
+        </div>
+
+        <button type="submit" [disabled]="disciplineForm.invalid" class="create-btn">Kreiraj</button>
+      </form>
+
+      <div *ngIf="createdDiscipline" class="message success">
+        <span class="material-icons">check_circle</span>
+        Disciplinu "<strong>{{ createdDiscipline.name }}</strong>" je kreirana sa ID: {{ createdDiscipline.id }}
+      </div>
+
+      <div *ngIf="errorMessage" class="message error">
+        <span class="material-icons">error</span>
+        {{ errorMessage }}
+      </div>
+    </div>
+
+  </div>
+</div>

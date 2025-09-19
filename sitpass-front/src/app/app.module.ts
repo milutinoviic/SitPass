@@ -16,6 +16,8 @@ import { ReviewComponent } from './components/review/review.component';
 import { FacilityInfoComponent } from './components/facility-info/facility-info.component';
 import { ExerciseComponent } from './components/exercise/exercise.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DisciplineManagmentComponent } from './components/discipline-managment/discipline-managment.component';
+import { CreateDisciplineComponent } from './components/create-discipline/create-discipline.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReviewComponent,
     FacilityInfoComponent,
     ExerciseComponent,
+    DisciplineManagmentComponent,
+    CreateDisciplineComponent,
    
   ],
   imports: [
