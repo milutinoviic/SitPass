@@ -1,0 +1,68 @@
+<div class="container">
+  <h2>Create Account</h2>
+
+  <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        class="form-control"
+      />
+      <div *ngIf="accountForm.get('email')?.invalid && accountForm.get('email')?.touched" class="error">
+        Unesite validan email.
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        class="form-control"
+      />
+      <div *ngIf="accountForm.get('password')?.invalid && accountForm.get('password')?.touched" class="error">
+        Lozinka mora imati najmanje 6 karaktera.
+      </div>
+    </div>
+
+    <!-- Address -->
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input
+        id="address"
+        type="text"
+        formControlName="address"
+        class="form-control"
+      />
+      <div *ngIf="accountForm.get('address')?.invalid && accountForm.get('address')?.touched" class="error">
+        Adresa mora imati najmanje 3 karaktera.
+      </div>
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit" [disabled]="accountForm.invalid" class="btn btn-primary">
+      Kreiraj nalog
+    </button>
+  </form>
+
+  <!-- Success response -->
+  <div *ngIf="response" class="success-box">
+    <h3>Uspešno kreiran zahtev!</h3>
+    <p><b>ID:</b> {{ response.id }}</p>
+    <p><b>Email:</b> {{ response.email }}</p>
+    <p><b>Address:</b> {{ response.address }}</p>
+    <p><b>Status:</b> {{ response.status }}</p>
+    <p><b>Created At:</b> {{ response.createdAt }}</p>
+  </div>
+
+  <!-- Error response -->
+  <div *ngIf="errorMessage" class="error-box">
+    {{ errorMessage }}
+  </div>
+</div>

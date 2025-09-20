@@ -18,6 +18,8 @@ import { ExerciseComponent } from './components/exercise/exercise.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DisciplineManagmentComponent } from './components/discipline-managment/discipline-managment.component';
 import { CreateDisciplineComponent } from './components/create-discipline/create-discipline.component';
+import { CreateAccountComponent } from './components/create-account/create-account.component';
+import { ControlaAccountRequestComponent } from './components/controla-account-request/controla-account-request.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { CreateDisciplineComponent } from './components/create-discipline/create
     ExerciseComponent,
     DisciplineManagmentComponent,
     CreateDisciplineComponent,
+    CreateAccountComponent,
+    ControlaAccountRequestComponent,
    
   ],
   imports: [

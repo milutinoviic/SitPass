@@ -1,0 +1,44 @@
+<div class="requests-container">
+  <h2 class="title">Account Requests</h2>
+
+  <table class="requests-table">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Status</th>
+        <th>Created At</th>
+        <th class="actions-col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let req of requests">
+        <td>{{ req.email }}</td>
+        <td>{{ req.address }}</td>
+        <td>
+          <span class="status"
+                [ngClass]="{
+                  'status-pending': req.status === 'PENDING',
+                  'status-approved': req.status === 'APPROVED',
+                  'status-rejected': req.status === 'REJECTED'
+                }">
+            {{ req.status }}
+          </span>
+        </td>
+        <td>{{ req.createdAt | date:'short' }}</td>
+        <td class="actions">
+          <button class="btn btn-approve" (click)="approveRequest(req)">Odobri</button>
+          <button class="btn btn-reject" (click)="enableReject(req.id)">Odbi</button>
+
+          <div *ngIf="rejectMode[req.id]" class="reject-box">
+            <input type="text"
+                   [(ngModel)]="rejectReason[req.id]"
+                   placeholder="Unesite razlog odbijanja" />
+            <button class="btn btn-confirm"
+                    (click)="confirmReject(req)">Potvrdi</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
