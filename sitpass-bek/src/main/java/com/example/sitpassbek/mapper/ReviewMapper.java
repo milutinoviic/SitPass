@@ -6,7 +6,9 @@ import com.example.sitpassbek.dto.review.ReviewDTO;
 import com.example.sitpassbek.model.Comment;
 import com.example.sitpassbek.model.Rate;
 import com.example.sitpassbek.model.Review;
+import com.example.sitpassbek.repository.CommentRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,7 @@ import java.util.List;
 @Component
 public class ReviewMapper {
 
-    public static ReviewDTO toDto(Review review) {
+    public ReviewDTO toDto(Review review) {
         ReviewDTO dto = new ReviewDTO();
         dto.setId(review.getId());
         dto.setCreatedAt(review.getCreatedAt());
@@ -34,7 +36,7 @@ public class ReviewMapper {
         return dto;
     }
 
-    public static List<ReviewDTO> toDtoList(List<Review> reviews) {
+    public List<ReviewDTO> toDtoList(List<Review> reviews) {
         List<ReviewDTO> dtoList = new ArrayList<>();
         for (Review review : reviews) {
             dtoList.add(toDto(review));
@@ -42,7 +44,7 @@ public class ReviewMapper {
         return dtoList;
     }
 
-    private static RateDTO toRateDto(Rate rate) {
+    private RateDTO toRateDto(Rate rate) {
         RateDTO dto = new RateDTO();
         dto.setId(rate.getId());
         dto.setEquipment(rate.getEquipment());
@@ -52,13 +54,21 @@ public class ReviewMapper {
         return dto;
     }
 
-    private static CommentDTO toCommentDto(Comment comment) {
+    public CommentDTO toCommentDto(Comment comment) {
         CommentDTO dto = new CommentDTO();
         dto.setId(comment.getId());
         dto.setText(comment.getText());
         dto.setCreatedAt(comment.getCreatedAt());
         dto.setUserId(comment.getUser() != null ? comment.getUser().getId() : null);
-        dto.setRepliesToId(comment.getRepliesTo() != null ? comment.getRepliesTo().getId() : null);
+
+        List<CommentDTO> repliesDto = new ArrayList<>();
+        if (comment.getReplies() != null) {
+            for (Comment reply : comment.getReplies()) {
+                repliesDto.add(toCommentDto(reply));
+            }
+        }
+        dto.setReplies(repliesDto);
+
         return dto;
     }
 

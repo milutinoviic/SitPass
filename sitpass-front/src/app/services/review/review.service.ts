@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CreateReview, Review } from '../../types/review.type';
+import { CommentReply } from '../../types/comment.type';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,10 @@ export class ReviewService {
 
   createReview(facilityId: number, review: CreateReview): Observable<Review> {
     return this.http.post<Review>(`${this.apiUrl}/createReview/${facilityId}`, review);
+  }
+
+   replyToComment(dto: CommentReply): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/reply`, dto);
   }
   
 }

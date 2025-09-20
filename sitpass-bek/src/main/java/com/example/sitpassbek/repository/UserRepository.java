@@ -19,4 +19,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u WHERE u.isDeleted = false AND u.id NOT IN (SELECT m.user.id FROM Manages m WHERE m.isDeleted = false)")
     List<User> findAllActiveUsersNotInManages();
+
+    User findUserById(Long id);
 }

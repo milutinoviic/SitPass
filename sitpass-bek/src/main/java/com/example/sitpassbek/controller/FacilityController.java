@@ -1,11 +1,13 @@
 package com.example.sitpassbek.controller;
 
+import com.example.sitpassbek.dto.comment.CommentReplyDto;
 import com.example.sitpassbek.dto.facility.CreateFacilityDTO;
 import com.example.sitpassbek.dto.facility.FacilityDTO;
 import com.example.sitpassbek.dto.facility.UpdateFacilityDTO;
 import com.example.sitpassbek.dto.review.CreateReviewDTO;
 import com.example.sitpassbek.dto.review.ReviewDTO;
 import com.example.sitpassbek.mapper.FacilityMapper;
+import com.example.sitpassbek.service.CommentService;
 import com.example.sitpassbek.service.FacilityService;
 import com.example.sitpassbek.service.ReviewService;
 import jakarta.validation.Valid;
@@ -22,12 +24,14 @@ public class FacilityController {
     private final FacilityService facilityService;
     private final FacilityMapper facilityMapper;
     private final ReviewService reviewService;
+    private final CommentService commentService;
 
     @Autowired
-    public FacilityController(FacilityService facilityService, FacilityMapper facilityMapper, ReviewService reviewService) {
+    public FacilityController(FacilityService facilityService, FacilityMapper facilityMapper, ReviewService reviewService,CommentService commentService) {
         this.facilityService = facilityService;
         this.facilityMapper = facilityMapper;
         this.reviewService = reviewService;
+        this.commentService = commentService;
     }
 
     @GetMapping("/info/{id}")
@@ -80,5 +84,13 @@ public class FacilityController {
         reviewService.deleteReview(reviewId);
         return ResponseEntity.ok("Review, rate and associated comments have been logically deleted.");
     }
+
+    @PostMapping("/reply")
+    public ResponseEntity<Void> replyToComment(@RequestBody CommentReplyDto commentReplyDto) {
+        commentService.replyToComment(commentReplyDto);
+        return ResponseEntity.ok().build();
+    }
+
+
 
 }

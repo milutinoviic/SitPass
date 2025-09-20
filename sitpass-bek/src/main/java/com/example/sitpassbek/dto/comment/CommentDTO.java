@@ -3,6 +3,7 @@ package com.example.sitpassbek.dto.comment;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class CommentDTO {
@@ -11,6 +12,6 @@ public class CommentDTO {
     private String text;
     private LocalDateTime createdAt;
     private Long userId;
-    private Long repliesToId;
+    private List<CommentDTO> replies;
 
 }

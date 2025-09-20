@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Review } from '../../types/review.type';
 import { ReviewService } from '../../services/review/review.service';
+import { HttpClient } from '@angular/common/http';
+import { TokenService } from '../../core/utils/token.service';
+import { CommentReply } from '../../types/comment.type';
 
 
 @Component({
@@ -11,18 +14,21 @@ import { ReviewService } from '../../services/review/review.service';
 })
 export class ReviewComponent implements OnInit {
 
-
-  @Input() facilityId!: number;
+ @Input() facilityId!: number;
   reviews: Review[] = [];
   loading = false;
   error: string | null = null;
 
-  constructor(private reviewService: ReviewService) {}
+  replyContent: { [key: number]: string } = {}; 
+  userId: number | null = null;
+
+  constructor(private reviewService: ReviewService, private http: HttpClient,private tokenService:TokenService) {}
 
   ngOnInit(): void {
     if (this.facilityId) {
       this.fetchReviews();
     }
+    this.userId = this.tokenService.getUserId();
   }
 
   fetchReviews(): void {
@@ -31,7 +37,6 @@ export class ReviewComponent implements OnInit {
     this.reviewService.getReviewsForFacility(this.facilityId).subscribe({
       next: (data) => {
         this.reviews = data;
-        console.log(data)
         this.loading = false;
       },
       error: (err) => {
@@ -42,4 +47,25 @@ export class ReviewComponent implements OnInit {
     });
   }
 
+  replyToComment(commentId: number): void {
+  const content = this.replyContent[commentId];
+  if (!content || !content.trim()) return;
+
+  const dto: CommentReply = {
+    commentId: commentId,
+    userId: this.userId || 1,
+    content: content
+  };
+
+  this.reviewService.replyToComment(dto).subscribe({
+    next: () => {
+      this.fetchReviews();
+      this.replyContent[commentId] = '';
+    },
+    error: (err) => {
+      console.error('Failed to reply to comment', err);
+    }
+  });
+
+}
 }

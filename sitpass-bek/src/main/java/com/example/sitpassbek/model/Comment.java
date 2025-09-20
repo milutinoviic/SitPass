@@ -5,6 +5,8 @@ import lombok.Data;
 import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,10 +29,13 @@ public class Comment {
     private User user;
 
     @OneToOne
-    @JoinColumn(name = "review_id", nullable = false)
+    @JoinColumn(name = "review_id")
     private Review review;
 
     @ManyToOne
     private Comment repliesTo;
+
+    @OneToMany(mappedBy = "repliesTo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> replies = new ArrayList<>();
 
 }
