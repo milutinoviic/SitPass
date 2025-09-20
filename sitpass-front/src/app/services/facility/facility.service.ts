@@ -24,4 +24,8 @@ export class FacilityService {
     return this.http.put<Facility>(`${this.baseUrl}/${id}`, dto);
   }
 
+  deleteFacility(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
 }

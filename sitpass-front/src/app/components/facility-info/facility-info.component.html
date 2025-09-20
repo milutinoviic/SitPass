@@ -27,5 +27,8 @@
       <strong>Created At:</strong> {{ facility.createdAt | date:'mediumDate' }}
     </div>
   </div>
+  <button (click)="deleteFacility()" class="delete-btn">
+    Delete Facility
+  </button>
 </div>
 

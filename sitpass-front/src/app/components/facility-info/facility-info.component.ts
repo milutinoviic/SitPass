@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Facility } from '../../types/facility.type';
 import { ActivatedRoute } from '@angular/router';
 import { FacilityService } from '../../services/facility/facility.service';
@@ -13,6 +13,7 @@ export class FacilityInfoComponent implements OnInit {
 
   
   @Input() facilityId!: number;  
+  @Output() facilityDeleted = new EventEmitter<number>(); 
   facility: Facility | null = null;
   loading = false;
   error: string | null = null;
@@ -38,6 +39,22 @@ export class FacilityInfoComponent implements OnInit {
         console.error('Error fetching facility:', err);
         this.error = 'Failed to load facility info';
         this.loading = false;
+      }
+    });
+  }
+
+  deleteFacility(): void {
+    if (!this.facilityId) return;
+
+    this.facilityService.deleteFacility(this.facilityId).subscribe({
+      next: () => {
+        console.log('Facility deleted successfully');
+        this.facilityDeleted.emit(this.facilityId); // obaveštavamo roditelja
+        this.facility = null; // uklanjamo sa prikaza
+      },
+      error: (err) => {
+        console.error('Error deleting facility:', err);
+        this.error = 'Failed to delete facility';
       }
     });
   }
