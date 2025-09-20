@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Discipline, DisciplineToFromFacility } from '../../types/discipline.type';
 import { DisciplineService } from '../../services/disipline/discipline.service';
+import { ManagesService } from '../../services/manages/manages.service';
+import { CheckManage } from '../../types/manages.type';
+import { TokenService } from '../../core/utils/token.service';
 
 @Component({
   selector: 'app-discipline-managment',
@@ -17,11 +20,41 @@ export class DisciplineManagmentComponent implements OnInit {
   disciplinesToAdd: Discipline[] = [];
   disciplinesToRemove: Discipline[] = [];
 
-  constructor(private disciplineService: DisciplineService) { }
+  hasAccess: boolean = false;
+  userId: number | null = null;
+
+  constructor(private disciplineService: DisciplineService,private managesService:ManagesService,private tokenService:TokenService) { }
 
   ngOnInit() {
-    this.loadData();
+    this.userId = this.tokenService.getUserId();
+    this.checkAccess();
   }
+
+  checkAccess() {
+  const dto: CheckManage = {
+    userId: this.userId || 1,
+    facilityId: this.facilityId
+  };
+  console.log(dto)
+
+  this.managesService.checkUserManagesFacility(dto).subscribe({
+    next: (res: boolean) => {
+      this.hasAccess = res;
+      console.log("-----------------res--------------")
+      console.log(res)
+      if (this.hasAccess) {
+        this.loadData();
+      } else {
+        alert('You do not have access to manage this facility.');
+      }
+    },
+    error: (err) => {
+      console.error('Access check failed', err);
+      this.hasAccess = false;
+    }
+  });
+}
+
 
   loadData() {
     this.disciplineService.getAllDisciplines().subscribe(all => {

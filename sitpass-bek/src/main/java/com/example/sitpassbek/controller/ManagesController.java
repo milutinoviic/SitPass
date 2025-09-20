@@ -1,5 +1,6 @@
 package com.example.sitpassbek.controller;
 
+import com.example.sitpassbek.dto.manages.CheckManageDTO;
 import com.example.sitpassbek.dto.manages.CreateManagesDTO;
 import com.example.sitpassbek.dto.manages.ManagesDTO;
 import com.example.sitpassbek.dto.manages.ManagesDetailDTO;
@@ -38,5 +39,10 @@ public class ManagesController {
     public ResponseEntity<List<ManagesDetailDTO>> getAllManagesForFacility(@PathVariable Long id) {
         return ResponseEntity.ok(managesService.getActiveManagersByFacility(id));
 
+    }
+
+    @PostMapping("/check")
+    public boolean checkManage(@RequestBody CheckManageDTO dto) {
+        return managesService.doesUserManageFacility(dto);
     }
 }

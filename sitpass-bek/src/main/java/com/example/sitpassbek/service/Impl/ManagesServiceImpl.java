@@ -1,5 +1,6 @@
 package com.example.sitpassbek.service.Impl;
 
+import com.example.sitpassbek.dto.manages.CheckManageDTO;
 import com.example.sitpassbek.dto.manages.CreateManagesDTO;
 import com.example.sitpassbek.dto.manages.ManagesDTO;
 import com.example.sitpassbek.dto.manages.ManagesDetailDTO;
@@ -84,6 +85,13 @@ public class ManagesServiceImpl implements ManagesService {
     public List<ManagesDetailDTO> getActiveManagersByFacility(Long facilityId) {
         List<Manages> manages = managesRepo.findAllByFacilityIdAndIsDeletedFalse(facilityId);
         return managesMapper.toDetailDTOList(manages);
+    }
+
+    @Override
+    public boolean doesUserManageFacility(CheckManageDTO dto) {
+        return managesRepo
+                .findByUserIdAndFacilityIdAndIsDeletedFalse(dto.getUserId(), dto.getFacilityId())
+                .isPresent();
     }
 
 }

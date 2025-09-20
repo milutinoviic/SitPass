@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CreateManages, Manages, ManagesDetail } from '../../types/manages.type';
+import { CheckManage, CreateManages, Manages, ManagesDetail } from '../../types/manages.type';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -22,5 +22,9 @@ export class ManagesService {
 
   deleteManager(dto: CreateManages): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete`, { body: dto });
+  }
+
+  checkUserManagesFacility(dto: CheckManage): Observable<boolean> {
+    return this.http.post<boolean>(`${this.apiUrl}/check`, dto);
   }
 }

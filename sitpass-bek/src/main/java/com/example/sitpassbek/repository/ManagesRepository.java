@@ -18,4 +18,6 @@ public interface ManagesRepository extends JpaRepository<Manages, Long> {
 
 
 
+
+
 }

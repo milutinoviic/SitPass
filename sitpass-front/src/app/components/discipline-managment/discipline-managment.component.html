@@ -18,7 +18,7 @@
               <button 
                 class="btn btn-sm btn-danger"
                 (click)="selectForRemove(d)" 
-                [disabled]="disciplinesToRemove.includes(d)">
+                [disabled]="!hasAccess || disciplinesToRemove.includes(d)">
                 Remove
               </button>
             </td>
@@ -43,7 +43,7 @@
               <button 
                 class="btn btn-sm btn-success"
                 (click)="selectForAdd(d)" 
-                [disabled]="disciplinesToAdd.includes(d)">
+                [disabled]="!hasAccess || disciplinesToAdd.includes(d)">
                 Add
               </button>
             </td>
@@ -58,13 +58,13 @@
      <button 
       class="btn btn-warning"
       (click)="removeDisciplines()" 
-      [disabled]="disciplinesToRemove.length === 0">
+      [disabled]="!hasAccess || disciplinesToRemove.length === 0">
       ❌ Remove Selected
     </button>
     <button 
       class="btn btn-primary"
       (click)="addDisciplines()" 
-      [disabled]="disciplinesToAdd.length === 0">
+      [disabled]="!hasAccess || disciplinesToAdd.length === 0">
       ✅ Add Selected
     </button>
 

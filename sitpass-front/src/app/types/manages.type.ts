@@ -20,3 +20,8 @@ export interface ManagesDetail {
   endDate: string | null;
   user: User;
 }
+
+export interface CheckManage {
+  userId: number;
+  facilityId: number;
+}

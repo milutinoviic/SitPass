@@ -44,7 +44,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/account-requests/reject").hasAnyAuthority( "Admin")
                         .requestMatchers("/api/account-requests/createAccountRequest/**","/public/**").permitAll()
                         .requestMatchers("/api/account-requests/getAllAccountRequest").hasAnyAuthority( "Admin")
-                        .requestMatchers("/api/manages/**").hasAnyAuthority( "Admin")
+                        .requestMatchers("/api/manages/**").hasAnyAuthority("User", "Admin")
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(
