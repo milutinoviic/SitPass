@@ -42,6 +42,12 @@ public class FacilityController {
         return ResponseEntity.ok(reviews);
     }
 
+    @GetMapping("/allActiveFacilities")
+    public ResponseEntity<List<FacilityDTO>> getActivFacilities() {
+        List<FacilityDTO> facilities = facilityService.getAllFacilityActiv();
+        return ResponseEntity.ok(facilities);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFacility(@PathVariable Long id) {
         facilityService.deleteFacility(id);

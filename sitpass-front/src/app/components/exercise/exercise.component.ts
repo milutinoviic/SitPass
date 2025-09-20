@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './exercise.component.scss'
 })
 export class ExerciseComponent {
- 
+
   @Input() facilityId!: number;
 
   form!: FormGroup;
@@ -18,7 +18,7 @@ export class ExerciseComponent {
   constructor(
     private fb: FormBuilder,
     private exerciseService: ExerciseService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -60,12 +60,25 @@ export class ExerciseComponent {
     // Ovde frontend ne zna tačno schedule, backend će baciti grešku
     // Ako želiš, možeš koristiti input od korisnika za radne sate
 
+    function formatLocalDateTime(date: Date): string {
+      const yyyy = date.getFullYear();
+      const mm = String(date.getMonth() + 1).padStart(2, '0');
+      const dd = String(date.getDate()).padStart(2, '0');
+      const hh = String(date.getHours()).padStart(2, '0');
+      const min = String(date.getMinutes()).padStart(2, '0');
+      const ss = String(date.getSeconds()).padStart(2, '0');
+
+      return `${yyyy}-${mm}-${dd}T${hh}:${min}:${ss}`;
+    }
+
     const exercise = {
-      from: start.toISOString(),
-      until: end.toISOString(),
-      userId: 1, // fiksno
+
+      from: formatLocalDateTime(start),
+      until: formatLocalDateTime(end),
+      userId: 1,
       facilityId: this.facilityId
     };
+    console.log(exercise);
 
     this.exerciseService.createExercise(exercise).subscribe({
       next: (data) => {

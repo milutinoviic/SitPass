@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class FacilityServiceImpl implements FacilityService {
@@ -69,6 +70,13 @@ public class FacilityServiceImpl implements FacilityService {
                 .orElseThrow(() -> new RuntimeException("Facility not found or deleted"));
 
         return facilityMapper.toDTO(facility);
+    }
+
+    @Override
+    public List<FacilityDTO> getAllFacilityActiv(){
+
+        List<Facility> facilities = facilityRepository.findAllByIsDeletedFalseAndActiveTrue();
+        return facilityMapper.toDTOList(facilities);
     }
 
 }
