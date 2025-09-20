@@ -26,7 +26,7 @@
     <textarea id="commentText" formControlName="commentText" rows="3"></textarea>
   </div>
 
-  <button type="submit" [disabled]="reviewForm.invalid">Submit Review</button>
+  <button type="submit" [disabled]="reviewForm.invalid || !canSubmitReview">Submit Review</button>
 
   <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
   <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>

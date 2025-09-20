@@ -3,6 +3,8 @@ import { ReviewService } from '../../services/review/review.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateReview } from '../../types/review.type';
 import { TokenService } from '../../core/utils/token.service';
+import { PastVisitsRequest } from '../../types/exercise.type';
+import { ExerciseService } from '../../services/exercise/exercise.service';
 
 @Component({
   selector: 'app-create-review',
@@ -14,12 +16,12 @@ export class CreateReviewComponent implements OnInit{
 
   @Input() facilityId!: number;
   userId: number | null = null;
-
+  canSubmitReview: boolean = false;
   reviewForm: FormGroup;
   successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private facilityService: ReviewService,private tokenService:TokenService) {
+  constructor(private fb: FormBuilder, private facilityService: ReviewService,private tokenService:TokenService,private exerciseService:ExerciseService) {
     this.reviewForm = this.fb.group({
       equipment: [null, [Validators.required, Validators.min(1), Validators.max(5)]],
       staff: [null, [Validators.required, Validators.min(1), Validators.max(5)]],
@@ -30,8 +32,25 @@ export class CreateReviewComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.userId = this.tokenService.getUserId();
+  this.userId = this.tokenService.getUserId();
+
+  if (this.userId && this.facilityId) {
+    const request: PastVisitsRequest = {
+      facilityId: this.facilityId,
+      userId: this.userId
+    };
+
+    this.exerciseService.getPastVisits(request).subscribe({
+      next: (visits) => {
+        this.canSubmitReview = visits >= 1;
+      },
+      error: (err) => {
+        console.error('Failed to fetch past visits', err);
+        this.canSubmitReview = false;
+      }
+    });
   }
+}
 
   submitReview() {
     if (this.reviewForm.invalid || !this.facilityId) return;

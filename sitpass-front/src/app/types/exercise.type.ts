@@ -12,3 +12,8 @@ export interface CreateExercise {
   from: string;   
   until: string;
 }
+
+export interface PastVisitsRequest {
+  facilityId: number;
+  userId: number;
+}

@@ -2,6 +2,7 @@ package com.example.sitpassbek.service.Impl;
 
 import com.example.sitpassbek.dto.exercise.CreateExerciseDTO;
 import com.example.sitpassbek.dto.exercise.ExerciseDTO;
+import com.example.sitpassbek.dto.exercise.PastVisitsRequestDTO;
 import com.example.sitpassbek.dto.workday.WorkDayDTO;
 import com.example.sitpassbek.mapper.ExerciseMapper;
 import com.example.sitpassbek.mapper.WorkDayMapper;
@@ -123,6 +124,15 @@ public class ExerciseServiceImpl implements ExerciseService {
         List<Exercise> exercises = exerciseRepository.findByUserIdAndIsDeletedFalse(userId);
         return ExerciseMapper.toDTOList(exercises);
 
+    }
+
+    @Override
+    public Long getPastVisits(PastVisitsRequestDTO requestDto) {
+        return exerciseRepository.countPastVisits(
+                requestDto.getUserId(),
+                requestDto.getFacilityId(),
+                LocalDateTime.now()
+        );
     }
 
 
