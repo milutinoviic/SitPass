@@ -1,0 +1,40 @@
+<div class="assign-container">
+  <h2>Izaberi korisnika za dodelu menadžera</h2>
+
+  <table cellpadding="8" cellspacing="0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>Email</th>
+        <th>Akcija</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.surname }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <button (click)="assignManager(user.id)">Dodeli</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="result" class="result" style="margin-top:20px;">
+    <h3>Menadžer dodeljen!</h3>
+    <p><b>ID:</b> {{ result.id }}</p>
+    <p><b>Facility ID:</b> {{ result.facilityId }}</p>
+    <p><b>Start Date:</b> {{ result.startDate }}</p>
+    <p><b>End Date:</b> {{ result.endDate }}</p>
+    <p><b>Deleted:</b> {{ result.isDeleted }}</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+</div>

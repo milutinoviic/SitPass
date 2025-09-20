@@ -23,6 +23,8 @@ import { ControlaAccountRequestComponent } from './components/controla-account-r
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { CreateFacilityComponent } from './components/create-facility/create-facility.component';
 import { UpdateFacilityComponent } from './components/update-facility/update-facility.component';
+import { AssignManagerComponent } from './components/assign-manager/assign-manager.component';
+import { ManagesForFacilityComponent } from './components/manages-for-facility/manages-for-facility.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { UpdateFacilityComponent } from './components/update-facility/update-fac
     ExerciseListComponent,
     CreateFacilityComponent,
     UpdateFacilityComponent,
+    AssignManagerComponent,
+    ManagesForFacilityComponent,
    
   ],
   imports: [

@@ -12,8 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     private final UserService userService;
@@ -26,16 +28,22 @@ public class UserController {
         this.jwtUtils = jwtUtils;
     }
 
-    @PostMapping("/createUser")
-    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody CreateUserDTO dto) {
-        UserDTO createdUser = userService.createUser(dto);
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<UserDTO> userDTOList = userService.getAllUsers();
+        return new ResponseEntity<>(userDTOList, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {
         UserDTO userDTO = userService.getUserById(id);
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
+    }
+
+    @PostMapping("/createUser")
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody CreateUserDTO dto) {
+        UserDTO createdUser = userService.createUser(dto);
+        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
     @PostMapping("/user/change-password")

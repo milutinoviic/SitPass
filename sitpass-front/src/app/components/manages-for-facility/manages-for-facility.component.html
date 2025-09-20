@@ -1,0 +1,35 @@
+<div *ngIf="manages.length > 0; else noData">
+  <table class="manages-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Akcija</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of manages">
+        <td>{{ m.id }}</td>
+        <td>{{ m.user.name }}</td>
+        <td>{{ m.user.surname }}</td>
+        <td>{{ m.startDate }}</td>
+        <td>{{ m.endDate || '-' }}</td>
+        <td>{{ m.user.email }}</td>
+        <td>{{ m.user.phoneNumber }}</td>
+        <td>
+          <button (click)="izbaciManager(m)">Izbaci</button>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noData>
+  <p>No managers found for this facility.</p>
+</ng-template>

@@ -2,6 +2,7 @@ package com.example.sitpassbek.service.Impl;
 
 import com.example.sitpassbek.dto.manages.CreateManagesDTO;
 import com.example.sitpassbek.dto.manages.ManagesDTO;
+import com.example.sitpassbek.dto.manages.ManagesDetailDTO;
 import com.example.sitpassbek.mapper.ManagesMapper;
 import com.example.sitpassbek.model.Facility;
 import com.example.sitpassbek.model.Manages;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Service
 public class ManagesServiceImpl implements ManagesService {
@@ -22,12 +24,14 @@ public class ManagesServiceImpl implements ManagesService {
     private final UserRepository userRepo;
     private final FacilityRepository facilityRepo;
     private final ManagesMapper mapper;
+    private final ManagesMapper managesMapper;
 
-    public ManagesServiceImpl(ManagesRepository managesRepo, UserRepository userRepo, FacilityRepository facilityRepo, ManagesMapper mapper) {
+    public ManagesServiceImpl(ManagesRepository managesRepo, UserRepository userRepo, FacilityRepository facilityRepo, ManagesMapper mapper, ManagesMapper managesMapper) {
         this.managesRepo = managesRepo;
         this.userRepo = userRepo;
         this.facilityRepo = facilityRepo;
         this.mapper = mapper;
+        this.managesMapper = managesMapper;
     }
 
     @Override
@@ -74,6 +78,12 @@ public class ManagesServiceImpl implements ManagesService {
         managesRepo.save(manages);
         facility.setActive(false);
         facilityRepo.save(facility);
+    }
+
+    @Override
+    public List<ManagesDetailDTO> getActiveManagersByFacility(Long facilityId) {
+        List<Manages> manages = managesRepo.findAllByFacilityIdAndIsDeletedFalse(facilityId);
+        return managesMapper.toDetailDTOList(manages);
     }
 
 }

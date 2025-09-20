@@ -43,7 +43,7 @@ public class FacilityServiceImpl implements FacilityService {
         facility.setAddress(dto.getAddress());
         facility.setCity(dto.getCity());
         facility.setCreatedAt(LocalDate.now());
-        facility.setActive(true);
+        facility.setActive(false);
         facility.setDeleted(false);
 
         Facility saved = facilityRepository.save(facility);

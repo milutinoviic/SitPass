@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Service
@@ -76,6 +77,12 @@ public class UserServiceImpl implements UserService {
 
         user.setPassword(passwordEncoder.encode(passwordDTO.getNewPassword()));
         userRepository.save(user);
+    }
+
+    @Override
+    public List<UserDTO> getAllUsers(){
+        List<User> users = userRepository.findAllActiveUsersNotInManages();
+        return userMapper.toDtoList(users);
     }
 
 
