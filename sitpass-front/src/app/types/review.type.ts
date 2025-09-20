@@ -1,5 +1,5 @@
-import { Comment } from "./comment.type";
-import { Rate } from "./rate.type";
+import { Comment, CreateComment } from "./comment.type";
+import { CreateRate, Rate } from "./rate.type";
 
 export interface Review {
   id: number;
@@ -10,4 +10,10 @@ export interface Review {
   userId: number;
   rate: Rate;
   comment?: Comment;
+}
+
+export interface CreateReview {
+  rate: CreateRate;
+  comment?: CreateComment;
+  userId: number;
 }

@@ -25,6 +25,7 @@ import { CreateFacilityComponent } from './components/create-facility/create-fac
 import { UpdateFacilityComponent } from './components/update-facility/update-facility.component';
 import { AssignManagerComponent } from './components/assign-manager/assign-manager.component';
 import { ManagesForFacilityComponent } from './components/manages-for-facility/manages-for-facility.component';
+import { CreateReviewComponent } from './components/create-review/create-review.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ManagesForFacilityComponent } from './components/manages-for-facility/m
     UpdateFacilityComponent,
     AssignManagerComponent,
     ManagesForFacilityComponent,
+    CreateReviewComponent,
    
   ],
   imports: [

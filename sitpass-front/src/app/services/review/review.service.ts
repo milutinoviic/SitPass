@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Review } from '../../types/review.type';
+import { CreateReview, Review } from '../../types/review.type';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,10 @@ export class ReviewService {
 
   getReviewsForFacility(facilityId: number): Observable<Review[]> {
     return this.http.get<Review[]>(`${this.apiUrl}/facility/${facilityId}`);
+  }
+
+  createReview(facilityId: number, review: CreateReview): Observable<Review> {
+    return this.http.post<Review>(`${this.apiUrl}/createReview/${facilityId}`, review);
   }
   
 }

@@ -5,3 +5,8 @@ export interface Comment {
   userId: number;
   repliesToId?: number;
 }
+
+export interface CreateComment {
+  text: string;
+  repliesToId?: number | null;
+}
