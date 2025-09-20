@@ -18,7 +18,7 @@ export class TokenService {
     return this.jwtHelper.decodeToken(token);
   }
 
-  getUserId(): string | null {
+  getUserId(): number | null {
     return this.getDecodedToken()?.id?.toString() || null;
   }
 

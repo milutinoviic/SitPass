@@ -12,7 +12,7 @@ export class FacilityDetailComponent {
 
   
   facilityId!: number;
-  userId: string | null = null;
+  userId: number | null = null;
 
   constructor(private route: ActivatedRoute,private tokenS:TokenService) {}
 

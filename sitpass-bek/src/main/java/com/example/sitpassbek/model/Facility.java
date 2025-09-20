@@ -67,9 +67,4 @@ public class Facility {
     @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
 
-    @Override
-    public String toString() {
-//        return super.toString();
-        return "Teretana" + this.name;
-    }
 }

@@ -10,9 +10,18 @@ export class ExerciseService {
 
   private apiUrl = 'http://localhost:8080/exercises';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+
+  getExercisesByUser(userId: number): Observable<Exercise[]> {
+    return this.http.get<Exercise[]>(`${this.apiUrl}/user/${userId}`);
+  }
 
   createExercise(dto: CreateExercise): Observable<Exercise> {
     return this.http.post<Exercise>(this.apiUrl, dto);
   }
+
+  deleteExercise(exerciseId: number) {
+  return this.http.delete<void>(`${this.apiUrl}/${exerciseId}`);
+}
+
 }

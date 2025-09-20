@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CreateExercise, Exercise } from '../../types/exercise.type';
 import { ExerciseService } from '../../services/exercise/exercise.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TokenService } from '../../core/utils/token.service';
 
 @Component({
   selector: 'app-exercise',
@@ -12,12 +13,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ExerciseComponent {
 
   @Input() facilityId!: number;
+   userId: number | null = null;
 
   form!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private exerciseService: ExerciseService
+    private exerciseService: ExerciseService,
+    private tokenService:TokenService
   ) { }
 
   ngOnInit(): void {
@@ -25,6 +28,7 @@ export class ExerciseComponent {
       startDateTime: ['', Validators.required],
       endDateTime: ['', Validators.required]
     });
+    this.userId = this.tokenService.getUserId();
   }
 
   createExercise(): void {
@@ -42,23 +46,17 @@ export class ExerciseComponent {
       return;
     }
 
-    // 2️⃣ proveri trajanje
     const minutes = (end.getTime() - start.getTime()) / (1000 * 60);
     if (!(minutes === 60 || minutes === 90)) {
       alert('Duration must be exactly 1h or 1.5h');
       return;
     }
 
-    // 3️⃣ start minute mora biti 0 ili 30
     const startMinute = start.getMinutes();
     if (!(startMinute === 0 || startMinute === 30)) {
       alert('Start time must be on the hour or half past');
       return;
     }
-
-    // 4️⃣ (opciono) proveri radno vreme facility-a
-    // Ovde frontend ne zna tačno schedule, backend će baciti grešku
-    // Ako želiš, možeš koristiti input od korisnika za radne sate
 
     function formatLocalDateTime(date: Date): string {
       const yyyy = date.getFullYear();
@@ -75,9 +73,10 @@ export class ExerciseComponent {
 
       from: formatLocalDateTime(start),
       until: formatLocalDateTime(end),
-      userId: 1,
+      userId: this.userId || 1,
       facilityId: this.facilityId
     };
+    console.log("-------------Ex---------------------")
     console.log(exercise);
 
     this.exerciseService.createExercise(exercise).subscribe({

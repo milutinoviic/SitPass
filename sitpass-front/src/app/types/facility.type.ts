@@ -8,3 +8,17 @@ export interface Facility {
   createdAt: string;
   active: boolean;
 }
+
+export interface CreateFacility {
+  name: string;
+  description: string;
+  address: string;
+  city: string;
+}
+
+export interface UpdateFacility {
+  name: string;
+  description: string;
+  address: string;
+  city: string;
+}

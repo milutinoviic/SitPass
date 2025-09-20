@@ -11,13 +11,13 @@ import java.util.stream.Collectors;
 public class ExerciseMapper {
 
     public static ExerciseDTO toDTO(Exercise exercise) {
-        return new ExerciseDTO(
-                exercise.getId(),
-                exercise.getUser().getId(),
-                exercise.getFacility().getId(),
-                exercise.getFrom(),
-                exercise.getUntil()
-        );
+        ExerciseDTO e = new ExerciseDTO();
+        e.setId(exercise.getId());
+        e.setUserId(exercise.getUser() != null ? exercise.getUser().getId() : null);
+        e.setFacilityId(exercise.getFacility() != null ? exercise.getFacility().getId() : null);
+        e.setFrom(exercise.getFrom());
+        e.setUntil(exercise.getUntil());
+        return e;
     }
 
     public static List<ExerciseDTO> toDTOList(List<Exercise> exercises) {

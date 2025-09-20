@@ -20,6 +20,9 @@ import { DisciplineManagmentComponent } from './components/discipline-managment/
 import { CreateDisciplineComponent } from './components/create-discipline/create-discipline.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { ControlaAccountRequestComponent } from './components/controla-account-request/controla-account-request.component';
+import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
+import { CreateFacilityComponent } from './components/create-facility/create-facility.component';
+import { UpdateFacilityComponent } from './components/update-facility/update-facility.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { ControlaAccountRequestComponent } from './components/controla-account-r
     CreateDisciplineComponent,
     CreateAccountComponent,
     ControlaAccountRequestComponent,
+    ExerciseListComponent,
+    CreateFacilityComponent,
+    UpdateFacilityComponent,
    
   ],
   imports: [

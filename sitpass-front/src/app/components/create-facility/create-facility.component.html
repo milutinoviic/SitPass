@@ -1,0 +1,42 @@
+<div class="facility-form">
+  <h2>Create Facility</h2>
+
+  <form [formGroup]="facilityForm" (ngSubmit)="submit()">
+    <label>
+      Name:
+      <input formControlName="name" />
+      <span *ngIf="facilityForm.get('name')?.invalid && facilityForm.get('name')?.touched">
+        Name is required (min 3 chars)
+      </span>
+    </label>
+
+    <label>
+      Description:
+      <textarea formControlName="description"></textarea>
+      <span *ngIf="facilityForm.get('description')?.invalid && facilityForm.get('description')?.touched">
+        Description is required (min 10 chars)
+      </span>
+    </label>
+
+    <label>
+      Address:
+      <input formControlName="address" />
+      <span *ngIf="facilityForm.get('address')?.invalid && facilityForm.get('address')?.touched">
+        Address is required (min 3 chars)
+      </span>
+    </label>
+
+    <label>
+      City:
+      <input formControlName="city" />
+      <span *ngIf="facilityForm.get('city')?.invalid && facilityForm.get('city')?.touched">
+        City is required (min 3 chars)
+      </span>
+    </label>
+
+    <button type="submit" [disabled]="facilityForm.invalid">Create</button>
+  </form>
+
+  <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+</div>
