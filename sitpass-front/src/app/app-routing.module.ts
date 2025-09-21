@@ -10,6 +10,8 @@ import { DisciplineComponent } from './components/discipline/discipline.componen
 import { FacilityDetailComponent } from './pages/facility-detail/facility-detail.component';
 import { ReviewComponent } from './components/review/review.component';
 import { FacilityInfoComponent } from './components/facility-info/facility-info.component';
+import { CreateDisciplineComponent } from './components/create-discipline/create-discipline.component';
+import { CreateAccountComponent } from './components/create-account/create-account.component';
 
 
 const routes: Routes = [
@@ -22,6 +24,9 @@ const routes: Routes = [
   { path: 'facilityDetail/:id', component: FacilityDetailComponent,canActivate:[RoleGuard],data: { expectedRoles: ['Admin', 'User'] }},
   { path: 'review', component: ReviewComponent,canActivate:[RoleGuard],data: { expectedRoles: ['Admin', 'User'] }},
   { path: 'facilityInfo', component: FacilityInfoComponent,canActivate:[RoleGuard],data: { expectedRoles: ['Admin', 'User'] }},
+  { path: 'createDiscipline', component:CreateDisciplineComponent,canActivate:[RoleGuard],data: { expectedRoles: ['Admin', 'User'] }},
+  { path: 'createAcc', component: CreateAccountComponent,canActivate:[LoginGuard] },
+  
   
 ];
 

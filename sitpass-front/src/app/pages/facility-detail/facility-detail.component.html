@@ -1,34 +1,161 @@
+<app-navbar></app-navbar>
+
+
+<div class="navbar-buttons-inline">
+  <button class="btn btn-primary" (click)="showModal = true">
+    Otvori Exercise
+  </button>
+  <button class="btn btn-primary" (click)="showDisciplineModal = true"  [disabled]="!hasAccess">
+    Otvori Discipline Management
+  </button>
+  <button class="btn btn-primary" [routerLink]="['/createDiscipline']">
+    Disicplin
+  </button>
+   <button class="btn btn-primary" (click)="showAccountRequestModal = true"   [disabled]="role !== 'Admin'">
+    Otvori Account Request
+  </button>
+
+  <button 
+    class="btn btn-primary" 
+    (click)="showExerciseListModal = true">
+    Otvori Exercise List
+  </button>
+
+  <button 
+    class="btn btn-primary" 
+    (click)="showCreateFacilityModal = true">
+    Otvori Create Facility
+  </button>
+
+  <button 
+    class="btn btn-primary" 
+    (click)="showUpdateFacilityModal = true"
+    [disabled]="!hasAccess">
+    Otvori Update Facility
+  </button>
+
+  <button 
+    class="btn btn-primary" 
+    (click)="showAssignManagerModal = true"
+    [disabled]="role !== 'admin'">
+    Otvori Assign Manager
+  </button>
+   <button 
+    class="btn btn-primary" 
+    (click)="showCreateReviewModal = true" [disabled]="!canSubmitReview">
+    Otvori Create Review
+  </button>
+</div>
+
 <h2>Facility Detail</h2>
 
-<app-facility-info [facilityId]="facilityId"></app-facility-info>
+<div class="facility-wrapper">
+  <div class="top-row">
+    <app-facility-info [facilityId]="facilityId"></app-facility-info>
+    <app-workday [facilityId]="facilityId"></app-workday>
+  </div>
 
-<app-discipline [facilityId]="facilityId"></app-discipline>
+  <div class="bottom-row">
+    <app-review [facilityId]="facilityId"></app-review>
+  </div>
+</div>
 
-<app-workday [facilityId]="facilityId"></app-workday>
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5>Exercise</h5>
+      <button (click)="showModal = false">&times;</button>
+    </div>
+    <div class="modal-body">
+      <app-exercise [facilityId]="facilityId"></app-exercise>
+    </div>
+  </div>
+</div>
 
-<app-review [facilityId]="facilityId"></app-review>
+<div class="modal-backdrop" *ngIf="showDisciplineModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5>Discipline Management</h5>
+      <button (click)="showDisciplineModal = false">&times;</button>
+    </div>
+    <div class="modal-body">
+      <app-discipline-managment [facilityId]="facilityId"></app-discipline-managment>
+    </div>
+  </div>
+</div>
 
-<app-exercise [facilityId]="facilityId"></app-exercise>
+<div class="modal-backdrop" *ngIf="showAccountRequestModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5>Account Request</h5>
+      <button (click)="showAccountRequestModal = false">&times;</button>
+    </div>
+    <div class="modal-body">
+      <app-controla-account-request></app-controla-account-request>
+    </div>
+  </div>
+</div>
 
-<app-discipline-managment [facilityId]="facilityId"></app-discipline-managment>
-
-<app-create-discipline></app-create-discipline>
-
-<app-create-account></app-create-account>
-
-<app-controla-account-request></app-controla-account-request>
-
-<app-exercise-list></app-exercise-list>
-
-<app-create-facility></app-create-facility>
-
-<app-update-facility [facilityId]="facilityId"></app-update-facility>
-
-<app-assign-manager [facilityId]="facilityId"></app-assign-manager>
-
-<app-manages-for-facility [facilityId]="facilityId"></app-manages-for-facility>
-
-<app-create-review [facilityId]="facilityId"></app-create-review>
+<div class="modal-backdrop" *ngIf="showExerciseListModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5>Exercise List</h5>
+      <button (click)="showExerciseListModal = false">&times;</button>
+    </div>
+    <div class="modal-body">
+     <app-exercise-list></app-exercise-list>
+    </div>
+  </div>
+</div>
 
 
+<div class="modal-backdrop" *ngIf="showCreateFacilityModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5>Create Facility</h5>
+      <button (click)="showCreateFacilityModal = false">&times;</button>
+    </div>
+    <div class="modal-body">
+      <app-create-facility></app-create-facility>
+    </div>
+  </div>
+</div>
 
+<div class="modal-backdrop" *ngIf="showUpdateFacilityModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5>Update Facility</h5>
+      <button (click)="showUpdateFacilityModal = false">&times;</button>
+    </div>
+    <div class="modal-body">
+      <app-update-facility [facilityId]="facilityId"></app-update-facility>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal-backdrop" *ngIf="showAssignManagerModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5>Assign Manager</h5>
+      <button (click)="showAssignManagerModal = false">&times;</button>
+    </div>
+    <div class="modal-body">
+      <app-assign-manager [facilityId]="facilityId"></app-assign-manager>
+      <app-manages-for-facility [facilityId]="facilityId"></app-manages-for-facility>
+      
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="showCreateReviewModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5>Create Review</h5>
+      <button (click)="showCreateReviewModal = false">&times;</button>
+    </div>
+    <div class="modal-body">
+      <app-create-review [facilityId]="facilityId"></app-create-review>
+    </div>
+  </div>
+</div>

@@ -28,6 +28,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  goToRegister() {
+    this.router.navigate(['/createAcc']); 
+  }
+
     onSubmit(): void {
     if (!this.loginForm.valid) {
       this.loginForm.markAllAsTouched();
