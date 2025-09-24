@@ -1,0 +1,28 @@
+{
+  "analysis": {
+    "analyzer": {
+      "srp": {
+        "type": "custom",
+        "tokenizer": "standard",
+        "filter": [
+          "serbian_cyrillic_to_latinic",
+          "icu_folding",
+          "lowercase"
+        ]
+      },
+      "eng": {
+        "type": "custom",
+        "tokenizer": "standard",
+        "filter": [
+          "lowercase"
+        ]
+      }
+    },
+    "filter": {
+      "serbian_cyrillic_to_latinic": {
+        "type": "icu_transform",
+        "id": "Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC"
+      }
+    }
+  }
+}
