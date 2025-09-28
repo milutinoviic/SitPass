@@ -7,5 +7,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface FacilitySearchService {
 
-    public Page<FacilityIndex> search(FacilitySearchDTO dto, Pageable pageable);
+    Page<FacilityIndex> search(FacilitySearchDTO dto, Pageable pageable);
 }

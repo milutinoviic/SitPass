@@ -37,7 +37,7 @@ public class FacilitySearchServiceImpl implements FacilitySearchService {
         var keywords = dto.keywords() == null ? List.of() : dto.keywords();
         var operator = dto.booleanOperator() == null ? "AND" : dto.booleanOperator().toUpperCase();
 
-        // If moreLikeThis flag set -> build MLT query
+        // If more
         NativeQuery searchQuery;
         if (Boolean.TRUE.equals(dto.moreLikeThis()) && !keywords.isEmpty()) {
             searchQuery = new NativeQueryBuilder()
