@@ -67,4 +67,9 @@ public class Facility {
     @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
 
+    @ElementCollection
+    private List<String> imageServerFilenames;
+
+    private String pdfServerFilename;
+
 }
