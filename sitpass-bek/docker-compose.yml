@@ -1,31 +1,31 @@
 version: '3.8'
 
 services:
-  sitpass-bek:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - ${PROJECT_SERVER_PORT}
-    environment:
-      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
-      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
-      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
-    depends_on:
-      - db
-    networks:
-      - ddmdemo-network
-
-  db:
-    image: postgres:13
-    environment:
-      - POSTGRES_USER=${SPRING_DATASOURCE_USERNAME}
-      - POSTGRES_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
-    ports:
-      - ${POSTGRES_DB_PORT}
-    networks:
-      - ddmdemo-network
+#  sitpass-bek:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    ports:
+#      - ${PROJECT_SERVER_PORT}
+#    environment:
+#      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+#      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+#      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+#    depends_on:
+#      - db
+#    networks:
+#      - ddmdemo-network
+#
+#  db:
+#    image: postgres:13
+#    environment:
+#      - POSTGRES_USER=${SPRING_DATASOURCE_USERNAME}
+#      - POSTGRES_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+#      - POSTGRES_DB=${POSTGRES_DB}
+#    ports:
+#      - ${POSTGRES_DB_PORT}
+#    networks:
+#      - ddmdemo-network
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.15.2
@@ -38,7 +38,11 @@ services:
       - "9200:9200"
     networks:
       - ddmdemo-network
+
+    volumes:
+      - es-data:/data
     restart: always
+
 
   minio:
     image: quay.io/minio/minio:latest
@@ -62,3 +66,4 @@ networks:
 
 volumes:
   minio-data:
+  es-data:
