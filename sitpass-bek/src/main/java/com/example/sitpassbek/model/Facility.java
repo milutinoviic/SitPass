@@ -57,7 +57,6 @@ public class Facility {
     )
     private List<Discipline> disciplines;
 
-
     @OneToMany(mappedBy = "facility")
     private List<WorkDay> workDays;
 
@@ -67,9 +66,7 @@ public class Facility {
     @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
 
-    @ElementCollection
-    private List<String> imageServerFilenames;
-
-    private String pdfServerFilename;
+    @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Description> descriptionFile;
 
 }
