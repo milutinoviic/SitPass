@@ -16,5 +16,8 @@ public class Description {
     @ManyToOne
     private Facility facility;
 
+    @ManyToOne
+    private User user;
+
     private boolean isDeleted;
 }
