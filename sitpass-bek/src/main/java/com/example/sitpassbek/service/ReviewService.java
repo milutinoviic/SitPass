@@ -1,6 +1,7 @@
 package com.example.sitpassbek.service;
 
 import com.example.sitpassbek.dto.comment.CreateCommentDTO;
+import com.example.sitpassbek.dto.facility.FacilityAvgRatingDTO;
 import com.example.sitpassbek.dto.rate.CreateRateDTO;
 import com.example.sitpassbek.dto.review.CreateReviewDTO;
 import com.example.sitpassbek.dto.review.ReviewDTO;
@@ -14,5 +15,9 @@ public interface ReviewService {
     void deleteReview(Long reviewId);
 
     List<ReviewDTO> getAllReviewsForFacility(Long facilityId);
+
+    FacilityAvgRatingDTO getFacilityAvgRating(Long facilityId);
+
+    int getCountOfReviewsForFacility(Long facility);
 
 }

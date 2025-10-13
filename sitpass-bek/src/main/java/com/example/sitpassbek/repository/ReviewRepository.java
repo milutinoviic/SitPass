@@ -15,6 +15,8 @@ public interface ReviewRepository  extends JpaRepository<Review, Long> {
 
     List<Review> findAllByFacilityAndIsDeletedFalse(Facility facility);
 
+    int countByFacilityId(Long facilityId);
+
 
 
 

@@ -4,6 +4,7 @@ import com.example.sitpassbek.service.FileService;
 import io.minio.*;
 import io.minio.http.Method;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,10 +14,14 @@ import java.util.Collections;
 import java.util.Objects;
 
 @Service
-@RequiredArgsConstructor
 public class FileServiceImpl implements FileService {
 
     private final MinioClient minioClient;
+
+    @Autowired
+    public FileServiceImpl(MinioClient minioClient) {
+        this.minioClient = minioClient;
+    }
 
     @Value("${spring.minio.bucket}")
     private String bucketName;

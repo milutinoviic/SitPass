@@ -1,6 +1,7 @@
 package com.example.sitpassbek.service.Impl;
 
 
+import com.example.sitpassbek.dto.facility.FacilityAvgRatingDTO;
 import com.example.sitpassbek.dto.review.CreateReviewDTO;
 import com.example.sitpassbek.dto.review.ReviewDTO;
 import com.example.sitpassbek.mapper.ReviewMapper;
@@ -141,6 +142,58 @@ public class ReviewServiceImpl implements ReviewService {
         facility.setTotalRating(count > 0 ? total / count : 0.0);
         facilityRepository.save(facility);
     }
+
+    @Override
+    public int getCountOfReviewsForFacility(Long facility) {
+        return reviewRepository.countByFacilityId(facility);
+    }
+
+    @Override
+    public FacilityAvgRatingDTO getFacilityAvgRating(Long facilityId) {
+        // Dohvati objekat
+        Facility facility = facilityRepository.findByIdAndIsDeletedFalse(facilityId)
+                .orElseThrow(() -> new RuntimeException("Facility not found with id " + facilityId));
+
+        List<Review> activeReviews = facility.getReviews().stream()
+                .filter(r -> r.getRate() != null && !r.getRate().isDeleted() && !r.isDeleted())
+                .toList();
+
+        if (activeReviews.isEmpty()) {
+            FacilityAvgRatingDTO dto = new FacilityAvgRatingDTO();
+            dto.setFacilityId(facility.getId());
+            dto.setAvgEquipment(null);
+            dto.setAvgHygene(null);
+            dto.setAvgSpace(null);
+            dto.setAvgStaff(null);
+            return dto;
+        }
+
+        double avgEquipment = activeReviews.stream()
+                .mapToInt(r -> r.getRate().getEquipment())
+                .average().orElse(0.0);
+
+        double avgHygene = activeReviews.stream()
+                .mapToInt(r -> r.getRate().getHygiene())
+                .average().orElse(0.0);
+
+        double avgSpace = activeReviews.stream()
+                .mapToInt(r -> r.getRate().getSpace())
+                .average().orElse(0.0);
+
+        double avgStaff = activeReviews.stream()
+                .mapToInt(r -> r.getRate().getStaff())
+                .average().orElse(0.0);
+
+        FacilityAvgRatingDTO dto = new FacilityAvgRatingDTO();
+        dto.setFacilityId(facility.getId());
+        dto.setAvgEquipment(avgEquipment);
+        dto.setAvgHygene(avgHygene);
+        dto.setAvgSpace(avgSpace);
+        dto.setAvgStaff(avgStaff);
+
+        return dto;
+    }
+
 
 
 

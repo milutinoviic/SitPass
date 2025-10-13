@@ -1,7 +1,5 @@
-FROM openjdk:21-jdk-slim
+# Use the official Elasticsearch image as a base
+FROM docker.elastic.co/elasticsearch/elasticsearch:8.15.0
 
-WORKDIR /app
-
-COPY target/sitpass-bek-0.0.1-SNAPSHOT.jar app.jar
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Install ICU plugin (with --batch to auto-confirm)
+RUN elasticsearch-plugin install --batch analysis-icu
