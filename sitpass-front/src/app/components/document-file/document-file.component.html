@@ -1,0 +1,9 @@
+<div *ngIf="documentFile; else noFile">
+  <p>Dokument: {{ documentFile.serverFilename }}</p>
+  <button (click)="downloadDocument()">Preuzmi dokument</button>
+</div>
+
+<ng-template #noFile>
+  <p *ngIf="errorMessage">{{ errorMessage }}</p>
+  <p *ngIf="!errorMessage">Nema dokumenta.</p>
+</ng-template>

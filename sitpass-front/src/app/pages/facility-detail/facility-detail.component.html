@@ -159,3 +159,22 @@
     </div>
   </div>
 </div>
+
+<!-- Dugme za otvaranje Facility Index -->
+<button class="btn btn-primary" (click)="showFacilityIndexModal = true">
+  Otvori Facility Index
+</button>
+
+<!-- Facility Index Modal -->
+<div class="facility-modal-backdrop" *ngIf="showFacilityIndexModal">
+  <div class="facility-modal">
+    <div class="facility-modal-header">
+      <h5>Facility Index Upload</h5>
+      <button class="close-btn" (click)="showFacilityIndexModal = false">&times;</button>
+    </div>
+    <div class="facility-modal-body">
+      <app-facility-index [facilityId]="facilityId"></app-facility-index>
+    </div>
+  </div>
+</div>
+

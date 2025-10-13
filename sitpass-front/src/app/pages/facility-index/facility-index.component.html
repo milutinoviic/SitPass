@@ -1,0 +1,19 @@
+<div class="upload-container">
+  <h3>Upload dokumenta za Facility ID: {{ facilityId }}</h3>
+
+  <!-- Input za fajl -->
+  <input type="file" (change)="onFileSelected($event)" />
+
+  <!-- Dugme za upload -->
+  <button (click)="onUpload()">Upload</button>
+
+  <!-- Poruka o uspehu -->
+  <div *ngIf="uploadSuccess" class="success-message">
+    Fajl je uspešno poslat!
+  </div>
+
+  <!-- Poruka o grešci -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+</div>

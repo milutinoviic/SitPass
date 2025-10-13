@@ -1,0 +1,34 @@
+.upload-container {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 400px;
+  margin: 30px auto;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+button {
+  margin-top: 15px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.success-msg {
+  color: green;
+  margin-top: 10px;
+}
+
+.error-msg {
+  color: red;
+  margin-top: 10px;
+}

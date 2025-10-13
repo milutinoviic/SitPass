@@ -22,3 +22,7 @@ export interface UpdateFacility {
   address: string;
   city: string;
 }
+
+export interface FacilityDocumentFile {
+  serverFilename: string;
+}

@@ -28,6 +28,8 @@ export class FacilityDetailComponent {
   showAssignManagerModal = false;
   showCreateReviewModal = false;
   canSubmitReview: boolean = false;
+  showFacilityIndexModal = false;
+
 
   constructor(
     private route: ActivatedRoute,
