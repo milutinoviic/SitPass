@@ -1,84 +1,25 @@
--- INSERT INTO facility (
---     id, name, description, created_at, address, city, total_rating, active, is_deleted
--- ) VALUES (
---              1,
---              'Fitnes Centar Arena',
---              'Savremeni fitnes centar sa teretanom i grupnim treninzima',
---              '2025-08-01',
---              'Bulevar Oslobodjenja 100',
---              'Novi Sad',
---              4.8,
---              true,
---              false
---          );
---
--- INSERT INTO work_day (
---     id, valid_from, day, start_time, end_time, is_deleted, facility_id
--- ) VALUES
---       (101, '2025-08-11', 'MONDAY',   '2025-08-11 08:00:00', '2025-08-11 16:00:00', false, 1),
---       (102, '2025-08-12', 'TUESDAY',  '2025-08-12 08:00:00', '2025-08-12 16:00:00', false, 1),
---       (103, '2025-08-13', 'WEDNESDAY','2025-08-13 08:00:00', '2025-08-13 16:00:00', false, 1),
---       (104, '2025-08-16', 'SATURDAY', '2025-08-16 09:00:00', '2025-08-16 13:00:00', false, 1),
---       (105, '2025-08-17', 'SUNDAY',   '2025-08-17 10:00:00', '2025-08-17 14:00:00', false, 1);
--- --
--- INSERT INTO work_day (
---     id, valid_from, day, start_time, end_time, is_deleted, facility_id
--- ) VALUES
---       (106, '2025-08-21', 'THURSDAY', '2025-08-21 08:00:00', '2025-08-21 16:00:00', false, 1),
---       (107, '2025-08-22', 'FRIDAY',   '2025-08-22 08:00:00', '2025-08-22 16:00:00', false, 1);
---
---
--- INSERT INTO work_day (
---     id, valid_from, day, start_time, end_time, is_deleted, facility_id
--- ) VALUES
---       (108, '2025-08-04', 'MONDAY',    '2025-08-04 08:00:00', '2025-08-04 16:00:00', false, 1),
---       (109, '2025-08-05', 'TUESDAY',   '2025-08-05 08:00:00', '2025-08-05 16:00:00', false, 1),
---       (110, '2025-08-06', 'WEDNESDAY', '2025-08-06 08:00:00', '2025-08-06 16:00:00', false, 1),
---       (111, '2025-08-09', 'SATURDAY',  '2025-08-09 09:00:00', '2025-08-09 13:00:00', false, 1),
---       (112, '2025-08-10', 'SUNDAY',    '2025-08-10 10:00:00', '2025-08-10 14:00:00', false, 1);
 
--- INSERT INTO work_day (valid_from, day, start_time, end_time, is_deleted, facility_id)
+-- =====================
+-- FACILITY (5)
+-- =====================
+-- INSERT INTO facility (id, name, description, created_at, address, city, total_rating, active, is_deleted)
 -- VALUES
---     ('2025-09-16', 'MONDAY', '2025-09-16 06:00:00', '2025-09-16 22:00:00', FALSE, 2),
---     ('2025-09-17', 'TUESDAY', '2025-09-17 06:00:00', '2025-09-17 22:00:00', FALSE, 2),
---     ('2025-09-18', 'WEDNESDAY', '2025-09-18 06:00:00', '2025-09-18 22:00:00', FALSE, 2),
---     ('2025-09-19', 'THURSDAY', '2025-09-19 06:00:00', '2025-09-19 22:00:00', FALSE, 2),
---     ('2025-09-20', 'FRIDAY', '2025-09-20 06:00:00', '2025-09-20 22:00:00', FALSE, 2),
---     ('2025-09-21', 'SATURDAY', '2025-09-21 08:00:00', '2025-09-21 20:00:00', FALSE, 2),
---     ('2025-09-22', 'SUNDAY', '2025-09-22 08:00:00', '2025-09-22 20:00:00', FALSE, 2);
+--     (2, 'FitZone', 'Moderna teretana sa saunom', '2024-01-10', 'Ulica Snage 1', 'Novi Sad', 4.5, true, false),
+--     (3, 'BodyLab', 'Centar za funkcionalni trening', '2024-02-15', 'Trg Sporta 12', 'Beograd', 4.2, true, false),
+--     (4, 'YogaFlow', 'Studio joge i pilatesa', '2024-03-01', 'Ulica Mira 9', 'Niš', 4.8, true, false),
+--     (5, 'SwimWorld', 'Bazen i aqua fitness', '2024-03-20', 'Vodena 4', 'Subotica', 4.4, true, false),
+--     (6, 'CrossFit Arena', 'Crossfit i HIIT treninzi', '2024-04-05', 'Snaga 2', 'Kragujevac', 4.6, true, false);
 
---
--- INSERT INTO work_day (
---     valid_from, day, start_time, end_time, is_deleted, facility_id
--- ) VALUES
---       ('2025-08-25', 'MONDAY',    '2025-08-25 08:00:00', '2025-08-25 16:00:00', false, 2),
---       ('2025-08-26', 'TUESDAY',   '2025-08-26 08:00:00', '2025-08-26 16:00:00', false, 2),
---       ('2025-08-27', 'WEDNESDAY', '2025-08-27 08:00:00', '2025-08-27 16:00:00', false, 2),
---       ('2025-08-30', 'SATURDAY',  '2025-08-30 09:00:00', '2025-08-30 13:00:00', false, 2),
---       ('2025-08-31', 'SUNDAY',    '2025-08-31 10:00:00', '2025-08-31 14:00:00', false, 2);
--- --
--- INSERT INTO work_day (
---     valid_from, day, start_time, end_time, is_deleted, facility_id
--- ) VALUES (
---              '2025-05-16',
---              'FRIDAY',
---              '2025-05-16 08:00:00',
---              '2025-05-16 16:00:00',
---              false,
---              1
---          );
---
---
+
 -- INSERT INTO discipline (id, name, is_deleted) VALUES
 --                                                   (1, 'Yoga', false),
 --                                                   (2, 'Pilates', false),
 --                                                   (3, 'Crossfit', false),
 --                                                   (4, 'Zumba', false),
 --                                                   (5, 'Spinning', false);
+
+
 --
---
--- INSERT INTO
--- --
 -- INSERT INTO work_day (id, valid_from, day, start_time, end_time, is_deleted, facility_id) VALUES
 -- -- Facility 1 (id: 1) [101–110]
 -- (1, '2025-08-11', 'MONDAY',    '2025-08-11 08:00:00', '2025-08-11 16:00:00', false, 1),
@@ -140,9 +81,53 @@
 -- (49, '2025-08-19', 'TUESDAY',   '2025-08-19 08:00:00', '2025-08-19 16:00:00', false, 5),
 -- (50, '2025-08-20', 'WEDNESDAY', '2025-08-20 08:00:00', '2025-08-20 16:00:00', false, 5);
 
--- INSERT INTO discipline (id, name, is_deleted) VALUES
---                                                   (1, 'Yoga', false),
---                                                   (2, 'Pilates', false),
---                                                   (3, 'Crossfit', false),
---                                                   (4, 'Zumba', false),
---                                                   (5, 'Spinning', false);
+-- -- Vežbe za korisnika 1
+-- INSERT INTO exercise (start_time, end_time, is_deleted, user_id, facility_id) VALUES
+--                                                                                   ('2025-10-05 10:00:00', '2025-10-05 11:00:00', false, 1, 1),
+--                                                                                   ('2025-10-07 18:00:00', '2025-10-07 19:30:00', false, 1, 2),
+--                                                                                   ('2025-10-13 08:00:00', '2025-10-13 09:00:00', false, 1, 3),
+--                                                                                   ('2025-10-20 17:00:00', '2025-10-20 18:00:00', false, 1, 1),
+--                                                                                   ('2025-10-25 19:00:00', '2025-10-25 20:30:00', false, 1, 2);
+--
+-- -- Vežbe za korisnika 2
+-- INSERT INTO exercise (start_time, end_time, is_deleted, user_id, facility_id) VALUES
+--                                                                                   ('2025-09-30 09:00:00', '2025-09-30 10:00:00', false, 2, 1),
+--                                                                                   ('2025-10-02 17:30:00', '2025-10-02 18:30:00', false, 2, 2),
+--                                                                                   ('2025-10-14 07:00:00', '2025-10-14 08:00:00', false, 2, 3),
+--                                                                                   ('2025-10-18 16:00:00', '2025-10-18 17:00:00', false, 2, 2),
+--                                                                                   ('2025-10-22 20:00:00', '2025-10-22 21:30:00', false, 2, 3);
+--
+-- -- Vežbe za korisnika 3
+-- INSERT INTO exercise (start_time, end_time, is_deleted, user_id, facility_id) VALUES
+--                                                                                   ('2025-09-25 08:30:00', '2025-09-25 09:30:00', false, 3, 3),
+--                                                                                   ('2025-10-01 19:00:00', '2025-10-01 20:00:00', false, 3, 1),
+--                                                                                   ('2025-10-10 06:30:00', '2025-10-10 07:30:00', false, 3, 2),
+--                                                                                   ('2025-10-16 18:00:00', '2025-10-16 19:00:00', false, 3, 3),
+--                                                                                   ('2025-10-23 17:30:00', '2025-10-23 18:30:00', false, 3, 1);
+
+-- -- REVIEW + RATE + COMMENT ZA USER 1
+-- INSERT INTO review (created_at, exercise_count, hidden, is_deleted, user_id, facility_id)
+-- VALUES
+--     ('2025-10-05 12:00:00', 5, false, false, 1, 1),
+--     ('2025-10-07 19:45:00', 4, false, false, 1, 2),
+--     ('2025-10-10 10:00:00', 7, false, false, 1, 3),
+--     ('2025-10-18 17:00:00', 2, false, false, 1, 1),
+--     ('2025-10-25 21:00:00', 3, false, false, 1, 2);
+--
+-- -- RATE (povezano po review_id)
+-- INSERT INTO rate (equipment, staff, hygiene, space, is_deleted, review_id) VALUES
+--                                                                                (5, 4, 5, 4, false, 1),
+--                                                                                (4, 5, 4, 5, false, 2),
+--                                                                                (5, 5, 5, 5, false, 3),
+--                                                                                (3, 4, 3, 3, false, 4),
+--                                                                                (4, 4, 5, 4, false, 5);
+--
+-- -- COMMENT (po review_id)
+-- INSERT INTO comment (is_deleted, text, created_at, user_id, review_id) VALUES
+--                                                                            (false, 'Odlična teretana, sve čisto i moderno.', '2025-10-05 13:00:00', 1, 1),
+--                                                                            (false, 'Osoblje jako ljubazno i profesionalno.', '2025-10-07 20:00:00', 1, 2),
+--                                                                            (false, 'Vrlo dobra atmosfera, preporučujem svima.', '2025-10-10 11:00:00', 1, 3),
+--                                                                            (false, 'Malo gužve popodne, ali sve ostalo super.', '2025-10-18 18:00:00', 1, 4),
+--                                                                            (false, 'Dobar prostor, sprave nove.', '2025-10-25 21:30:00', 1, 5);
+--
+--

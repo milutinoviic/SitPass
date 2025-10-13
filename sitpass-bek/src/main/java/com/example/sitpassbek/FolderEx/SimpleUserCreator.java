@@ -25,24 +25,34 @@
 //
 //    @Override
 //    public void run(String... args) throws Exception {
+//
 //        User user = new User();
-//        user.setEmail("test@example.com");
+//        user.setEmail("user2@gmail.com");
 //        user.setPassword(passwordEncoder.encode("password123"));
-//        user.setAddress("KKKKK");
+//        user.setAddress("Bulevar Oslobodjenja 100");
 //        user.setCreatedAt(LocalDate.now());
 //
 //
 //        userRepository.save(user);
 //
-//
-//        Administrator user1 = new Administrator();
-//        user1.setEmail("test123@example.com");
+//        User user1 = new User();
+//        user1.setEmail("user4@gmail.com");
 //        user1.setPassword(passwordEncoder.encode("password123"));
-//        user1.setAddress("KKKKK");
+//        user1.setAddress("Bulevar Oslobodjenja 100");
 //        user1.setCreatedAt(LocalDate.now());
 //
 //
 //        userRepository.save(user1);
+//
+//
+//        Administrator user2 = new Administrator();
+//        user2.setEmail("admin2@gmail.com");
+//        user2.setPassword(passwordEncoder.encode("password123"));
+//        user2.setAddress("Bulevar Oslobodjenja 100");
+//        user2.setCreatedAt(LocalDate.now());
+//
+//
+//        userRepository.save(user2);
 //
 //
 //
