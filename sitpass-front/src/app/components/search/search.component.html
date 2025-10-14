@@ -11,33 +11,44 @@
     <label>Keywords:</label>
     <input type="text" [(ngModel)]="simpleKeywords" placeholder="Enter keywords..." />
 
+    <h4>Filter by Ranges</h4>
+
+    <div class="range-field">
+      <label>Review Count:</label>
+      <input type="number" [(ngModel)]="ranges['reviewCount'].min" placeholder="Min" />
+      <input type="number" [(ngModel)]="ranges['reviewCount'].max" placeholder="Max" />
+    </div>
+
+    <div class="range-field">
+      <label>Avg Equipment Grade:</label>
+      <input type="number" [(ngModel)]="ranges['avgEquipmentGrade'].min" placeholder="Min" />
+      <input type="number" [(ngModel)]="ranges['avgEquipmentGrade'].max" placeholder="Max" />
+    </div>
+
+    <div class="range-field">
+      <label>Avg Staff Grade:</label>
+      <input type="number" [(ngModel)]="ranges['avgStaffGrade'].min" placeholder="Min" />
+      <input type="number" [(ngModel)]="ranges['avgStaffGrade'].max" placeholder="Max" />
+    </div>
+
+    <div class="range-field">
+      <label>Avg Hygiene Grade:</label>
+      <input type="number" [(ngModel)]="ranges['avgHygieneGrade'].min" placeholder="Min" />
+      <input type="number" [(ngModel)]="ranges['avgHygieneGrade'].max" placeholder="Max" />
+    </div>
+
+    <div class="range-field">
+      <label>Avg Space Grade:</label>
+      <input type="number" [(ngModel)]="ranges['avgSpaceGrade'].min" placeholder="Min" />
+      <input type="number" [(ngModel)]="ranges['avgSpaceGrade'].max" placeholder="Max" />
+    </div>
+
+
     <label>
       <input type="checkbox" [(ngModel)]="isAsc" /> Sort ascending
     </label>
 
     <button (click)="onSimpleSearch()">Search</button>
-  </div>
-
-  <!-- ADVANCED SEARCH -->
-  <div *ngIf="activeTab === 'advanced'" class="search-form">
-    <label>Expressions (comma separated):</label>
-    <input type="text" [(ngModel)]="advancedExpressions" placeholder="e.g. name:clinic, avgSpaceGrade>4" />
-
-    <div class="ranges">
-      <h4>Ranges</h4>
-      <div>
-        <input type="number" [(ngModel)]="ranges['avgEquipmentGrade'].min" placeholder="min" />
-        <label>max:</label>
-        <input type="number" [(ngModel)]="ranges['avgEquipmentGrade'].max" placeholder="max" />
-
-      </div>
-    </div>
-
-    <label>
-      <input type="checkbox" [(ngModel)]="isAsc" /> Sort ascending
-    </label>
-
-    <button (click)="onAdvancedSearch()">Search</button>
   </div>
 
   <!-- RESULTS -->
@@ -49,9 +60,10 @@
     <ul>
       <li *ngFor="let f of results">
         <strong>{{ f.name }}</strong> — {{ f.descriptionSr || f.descriptionEn }}
-        <br>
+        <br />
         Grades: Equip: {{ f.avgEquipmentGrade }}, Staff: {{ f.avgStaffGrade }},
-        Hygiene: {{ f.avgHygieneGrade }}, Space: {{ f.avgSpaceGrade }}
+        Hygiene: {{ f.avgHygieneGrade }}, Space: {{ f.avgSpaceGrade }},
+        Reviews: {{ f.reviewCount }}
       </li>
     </ul>
   </div>
