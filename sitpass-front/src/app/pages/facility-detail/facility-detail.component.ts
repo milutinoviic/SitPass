@@ -29,6 +29,7 @@ export class FacilityDetailComponent {
   showCreateReviewModal = false;
   canSubmitReview: boolean = false;
   showFacilityIndexModal = false;
+  showDocumentModal = false;
 
 
   constructor(

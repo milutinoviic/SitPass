@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FacilityDocumentFile } from '../../types/facility.type';
 import { IndexService } from '../../services/index/index.service';
 
@@ -12,15 +12,19 @@ export class DocumentFileComponent {
 
   documentFile?: FacilityDocumentFile;
   errorMessage: string = '';
+   @Input() facilityId!: number; 
 
   constructor(private documentFileService: IndexService) { }
 
-  ngOnInit(): void {
-    const documentId = '3';
-    this.getDocument(documentId);
+   ngOnInit(): void {
+    if (this.facilityId) {
+      this.getDocument(this.facilityId);
+    } else {
+      this.errorMessage = 'Nije prosleđen dokument ID.';
+    }
   }
 
-  getDocument(id: string): void {
+  getDocument(id: number): void {
     this.documentFileService.getDocumentFile(id).subscribe({
       next: (file) => {
         this.documentFile = file;

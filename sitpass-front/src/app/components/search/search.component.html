@@ -1,0 +1,58 @@
+<div class="search-container">
+  <h2>Search</h2>
+
+  <div class="tabs">
+    <button [class.active]="activeTab === 'simple'" (click)="activeTab = 'simple'">Simple Search</button>
+    <button [class.active]="activeTab === 'advanced'" (click)="activeTab = 'advanced'">Advanced Search</button>
+  </div>
+
+  <!-- SIMPLE SEARCH -->
+  <div *ngIf="activeTab === 'simple'" class="search-form">
+    <label>Keywords:</label>
+    <input type="text" [(ngModel)]="simpleKeywords" placeholder="Enter keywords..." />
+
+    <label>
+      <input type="checkbox" [(ngModel)]="isAsc" /> Sort ascending
+    </label>
+
+    <button (click)="onSimpleSearch()">Search</button>
+  </div>
+
+  <!-- ADVANCED SEARCH -->
+  <div *ngIf="activeTab === 'advanced'" class="search-form">
+    <label>Expressions (comma separated):</label>
+    <input type="text" [(ngModel)]="advancedExpressions" placeholder="e.g. name:clinic, avgSpaceGrade>4" />
+
+    <div class="ranges">
+      <h4>Ranges</h4>
+      <div>
+        <input type="number" [(ngModel)]="ranges['avgEquipmentGrade'].min" placeholder="min" />
+        <label>max:</label>
+        <input type="number" [(ngModel)]="ranges['avgEquipmentGrade'].max" placeholder="max" />
+
+      </div>
+    </div>
+
+    <label>
+      <input type="checkbox" [(ngModel)]="isAsc" /> Sort ascending
+    </label>
+
+    <button (click)="onAdvancedSearch()">Search</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="error">{{ error }}</div>
+
+  <div *ngIf="results.length > 0" class="results">
+    <h3>Results</h3>
+    <ul>
+      <li *ngFor="let f of results">
+        <strong>{{ f.name }}</strong> — {{ f.descriptionSr || f.descriptionEn }}
+        <br>
+        Grades: Equip: {{ f.avgEquipmentGrade }}, Staff: {{ f.avgStaffGrade }},
+        Hygiene: {{ f.avgHygieneGrade }}, Space: {{ f.avgSpaceGrade }}
+      </li>
+    </ul>
+  </div>
+</div>

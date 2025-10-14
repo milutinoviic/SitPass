@@ -178,3 +178,28 @@
   </div>
 </div>
 
+<br>
+<br>
+
+<!-- Dugme za otvaranje Document File moda -->
+<button class="btn btn-primary" (click)="showDocumentModal = true">
+  Otvori dokument
+</button>
+
+<!-- Document Modal -->
+<div class="facility-modal-backdrop" *ngIf="showDocumentModal">
+  <div class="facility-modal">
+    <div class="facility-modal-header">
+      <h5>Document File</h5>
+      <button class="close-btn" (click)="showDocumentModal = false">&times;</button>
+    </div>
+
+    <div class="facility-modal-body">
+      <!-- Ovdje pozivaš DocumentFileComponent i prosleđuješ dokumentId -->
+      <app-document-file [facilityId]="facilityId"></app-document-file>
+    </div>
+  </div>
+</div>
+
+
+

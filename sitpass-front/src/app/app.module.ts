@@ -28,6 +28,7 @@ import { ManagesForFacilityComponent } from './components/manages-for-facility/m
 import { CreateReviewComponent } from './components/create-review/create-review.component';
 import { FacilityIndexComponent } from './pages/facility-index/facility-index.component';
 import { DocumentFileComponent } from './components/document-file/document-file.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { DocumentFileComponent } from './components/document-file/document-file.
     CreateReviewComponent,
     FacilityIndexComponent,
     DocumentFileComponent,
+    SearchComponent,
    
   ],
   imports: [

@@ -21,7 +21,7 @@ export class IndexService {
     return this.http.post(`${this.baseUrl}/${facilityId}`, formData);
   }
 
-  getDocumentFile(id: string): Observable<FacilityDocumentFile> {
+  getDocumentFile(id: number): Observable<FacilityDocumentFile> {
     return this.http.get<FacilityDocumentFile>(`${this.baseUrl}/${id}`);
   }
 
