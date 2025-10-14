@@ -156,33 +156,6 @@ public class SearchServiceImpl implements SearchService {
             return q;
         })._toQuery();
 
-
-//
-//                        // moreLikeThis – obično ignoriši ako je prekratak token
-//                        if (token.length() > 3) {
-//                            b.should(s -> s.moreLikeThis(mlt -> mlt
-//                                    .fields("name", "descriptionSr", "descriptionEn", "fileDescriptionSr", "fileDescriptionEn")
-//                                    .like(l -> l.text(finalToken))
-//                                    .minTermFreq(1)
-//                                    .minDocFreq(1)
-//                            ));
-//                        }
-//                    }
-//
-//                    for (Map.Entry<String, RangeDTO> entry : ranges.entrySet()) {
-//                        String field = entry.getKey();
-//                        RangeDTO range = entry.getValue();
-//                        b.filter(f -> f.range(r -> {
-//                            r.field(field);
-//                            if (range.min() != null) r.gte(JsonData.of(range.min()));
-//                            if (range.max() != null) r.lte(JsonData.of(range.max()));
-//                            return r;
-//                        }));
-//                    }
-//
-//                    return b;
-//                })
-//        );
     }
 
 
