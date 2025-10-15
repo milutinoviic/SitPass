@@ -1,70 +1,80 @@
 <div class="search-container">
-  <h2>Search</h2>
+  <!-- SIMPLE SEARCH -->
+  <h2>Simple Search</h2>
+  <div class="simple-search">
+    <input
+      type="text"
+      [(ngModel)]="simpleQuery"
+      placeholder="Enter keywords..."
+      class="search-input"
+    />
 
-  <div class="tabs">
-    <button [class.active]="activeTab === 'simple'" (click)="activeTab = 'simple'">Simple Search</button>
-    <button [class.active]="activeTab === 'advanced'" (click)="activeTab = 'advanced'">Advanced Search</button>
+    <!-- Range filters -->
+    <div class="range-filters">
+      <div *ngFor="let field of numericFields" class="range-field">
+        <label>
+          {{ field.label }} (min):
+          <input type="number" [(ngModel)]="simpleRanges[field.name].min" />
+        </label>
+        <label>
+          {{ field.label }} (max):
+          <input type="number" [(ngModel)]="simpleRanges[field.name].max" />
+        </label>
+      </div>
+    </div>
+
+    <button (click)="onSimpleSearch()" class="btn-search">Search</button>
+    <button (click)="andJustLikeThat()" class="btn-search">... Or maybe more like this</button>
   </div>
 
-  <!-- SIMPLE SEARCH -->
-  <div *ngIf="activeTab === 'simple'" class="search-form">
-    <label>Keywords:</label>
-    <input type="text" [(ngModel)]="simpleKeywords" placeholder="Enter keywords..." />
+  <select [(ngModel)]="isAsc" class="search-input">
+    <option [ngValue]="true">Asc</option>
+    <option [ngValue]="false">Desc</option>
+  </select>
 
-    <h4>Filter by Ranges</h4>
+  <!-- ADVANCED SEARCH -->
+  <h2>Advanced Search</h2>
+  <div class="advanced-search">
+    <textarea
+      [(ngModel)]="advancedQuery"
+      placeholder='Example: name:"hotel" AND description:"spa"'
+      rows="3"
+      class="search-textarea"
+    ></textarea>
 
-    <div class="range-field">
-      <label>Review Count:</label>
-      <input type="number" [(ngModel)]="ranges['reviewCount'].min" placeholder="Min" />
-      <input type="number" [(ngModel)]="ranges['reviewCount'].max" placeholder="Max" />
+    <!-- Range filters -->
+    <div class="range-filters">
+      <div *ngFor="let field of numericFields" class="range-field">
+        <label>
+          {{ field.label }} (min):
+          <input type="number" [(ngModel)]="advRanges[field.name].min" />
+        </label>
+        <label>
+          {{ field.label }} (max):
+          <input type="number" [(ngModel)]="advRanges[field.name].max" />
+        </label>
+      </div>
     </div>
 
-    <div class="range-field">
-      <label>Avg Equipment Grade:</label>
-      <input type="number" [(ngModel)]="ranges['avgEquipmentGrade'].min" placeholder="Min" />
-      <input type="number" [(ngModel)]="ranges['avgEquipmentGrade'].max" placeholder="Max" />
-    </div>
-
-    <div class="range-field">
-      <label>Avg Staff Grade:</label>
-      <input type="number" [(ngModel)]="ranges['avgStaffGrade'].min" placeholder="Min" />
-      <input type="number" [(ngModel)]="ranges['avgStaffGrade'].max" placeholder="Max" />
-    </div>
-
-    <div class="range-field">
-      <label>Avg Hygiene Grade:</label>
-      <input type="number" [(ngModel)]="ranges['avgHygieneGrade'].min" placeholder="Min" />
-      <input type="number" [(ngModel)]="ranges['avgHygieneGrade'].max" placeholder="Max" />
-    </div>
-
-    <div class="range-field">
-      <label>Avg Space Grade:</label>
-      <input type="number" [(ngModel)]="ranges['avgSpaceGrade'].min" placeholder="Min" />
-      <input type="number" [(ngModel)]="ranges['avgSpaceGrade'].max" placeholder="Max" />
-    </div>
-
-
-    <label>
-      <input type="checkbox" [(ngModel)]="isAsc" /> Sort ascending
-    </label>
-
-    <button (click)="onSimpleSearch()">Search</button>
+    <button (click)="onAdvancedSearch()" class="btn-search">Advanced Search</button>
   </div>
 
   <!-- RESULTS -->
-  <div *ngIf="loading">Loading...</div>
-  <div *ngIf="error">{{ error }}</div>
-
-  <div *ngIf="results.length > 0" class="results">
-    <h3>Results</h3>
-    <ul>
-      <li *ngFor="let f of results">
-        <strong>{{ f.name }}</strong> — {{ f.descriptionSr || f.descriptionEn }}
-        <br />
-        Grades: Equip: {{ f.avgEquipmentGrade }}, Staff: {{ f.avgStaffGrade }},
-        Hygiene: {{ f.avgHygieneGrade }}, Space: {{ f.avgSpaceGrade }},
-        Reviews: {{ f.reviewCount }}
-      </li>
-    </ul>
+  <h2>Results</h2>
+  <div *ngIf="results.length > 0; else noResults">
+    <div *ngFor="let item of results" class="search-result">
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.descriptionEn || item.descriptionSr }}</p>
+      <p><strong>Reviews:</strong> {{ item.reviewCount }}</p>
+      <p><strong>Avg Equipment Grade:</strong> {{ item.avgEquipmentGrade }}</p>
+      <p><strong>Avg Staff Grade:</strong> {{ item.avgStaffGrade }}</p>
+      <p><strong>Avg Hygiene Grade:</strong> {{ item.avgHygieneGrade }}</p>
+      <p><strong>Avg Space Grade:</strong> {{ item.avgSpaceGrade }}</p>
+      <button (click)="downloadPDF(item.serverFilename)" class="btn-search">Download PDF</button>
+    </div>
   </div>
+
+  <ng-template #noResults>
+    <p>No results found.</p>
+  </ng-template>
 </div>
