@@ -10,6 +10,8 @@ services:
       - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms1g -Xmx1g
       - xpack.security.enabled=false
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
     networks:
@@ -47,3 +49,4 @@ networks:
 
 volumes:
   minio-data:
+  es-data:
