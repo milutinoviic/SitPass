@@ -13,4 +13,6 @@ public interface FileService {
 
     GetObjectResponse loadAsResource(String serverFilename) throws FileNotFoundException;
 
+    byte[] downloadFile(String objectName);
+
 }

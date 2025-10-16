@@ -1,0 +1,25 @@
+<div class="upload-section">
+  <input type="file" (change)="onFileSelected($event)" multiple />
+  <button (click)="uploadImages()" [disabled]="loading || selectedFiles.length === 0">
+    Upload
+  </button>
+</div>
+
+<div *ngIf="loading" class="loading">Učitavanje...</div>
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+<div class="image-grid" *ngIf="images1.length > 0">
+  <div *ngFor="let img of images1" class="image-card">
+    <!-- Prikaz Base64 slike -->
+    <img *ngIf="img.base64" [src]="img.base64" [alt]="img.filename" class="facility-img" />
+    
+    <!-- Prikaz greške ako postoji -->
+    <div *ngIf="img.error" class="error-text">{{ img.error }}</div>
+    
+    <p>{{ img.filename }}</p>
+  </div>
+</div>
+
+<div *ngIf="!loading && images1.length === 0">
+  Nema dostupnih slika za ovaj objekat.
+</div>

@@ -1,71 +1,73 @@
 package com.example.sitpassbek.controller;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.sitpassbek.model.Facility;
+import com.example.sitpassbek.model.Image;
+import com.example.sitpassbek.repository.FacilityRepository;
+import com.example.sitpassbek.repository.ImageRepository;
+import com.example.sitpassbek.service.FileService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.net.MalformedURLException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.*;
 
 @RestController
-@RequestMapping(value = "/api/images")
+@RequestMapping("/api/images")
+@RequiredArgsConstructor
 public class ImageController {
 
-    @Value("${upload.dir}")
-    private String uploadDir;
+    private final FacilityRepository facilityRepository;
+    private final ImageRepository imageRepository;
+    private final FileService fileService;
 
-    @PostMapping(value = "/serve", consumes = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<Resource> serveFile(@RequestBody String filename) {
-        try {
-            filename = filename.trim();
+    /**
+     * Upload jedne ili više slika u MinIO za dati Facility
+     */
+    @PostMapping("/{facilityId}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<Image> uploadImages(
+            @PathVariable Long facilityId,
+            @RequestParam("files") List<MultipartFile> files) {
 
-            // Save the uploadDir as a variable to use it multiple times later
-            String uploadDirPath = uploadDir;
+        Facility facility = facilityRepository.findById(facilityId)
+                .orElseThrow(() -> new RuntimeException("Facility not found with id: " + facilityId));
 
-            // Check if the filename starts with "/" and remove it if necessary
-            if (filename.startsWith("/")) {
-                filename = filename.substring(1);
-            }
+        return files.stream().map(file -> {
+            // 1️⃣ Snimi fajl u MinIO
+            String storedFileName = fileService.store(file, UUID.randomUUID().toString());
 
-            // Create the full path of the file by combining uploadDir and filename
-            Path filePath = Paths.get(filename).normalize();
-
-            // Check if the path is within the current directory to prevent attacks
-            if (!filePath.startsWith(Paths.get("."))) {
-                filePath = Paths.get(".", filename).normalize();
-            }
-
-            // Create a Resource object from the filePath
-            Resource resource = new UrlResource(filePath.toUri());
-
-            System.out.println("Filename : " + filename);
-            System.out.println("File path : " + filePath);
-            System.out.println("Resource : " + resource);
-
-            // Check if the file exists and is readable
-            if (resource.exists() && resource.isReadable()) {
-                // Construct the response with the Resource as the body
-                return ResponseEntity.ok()
-                        .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
-                        .body(resource);
-            } else {
-                // If the file does not exist or is not readable, return a 404 Not Found response
-                return ResponseEntity.notFound().build();
-            }
-        } catch (MalformedURLException e) {
-            // If a MalformedURLException occurs, return a 400 Bad Request response
-            e.printStackTrace();
-            return ResponseEntity.badRequest().build();
-        }
+            // 2️⃣ Upisi podatke u bazu
+            Image image = new Image();
+            image.setFacility(facility);
+            image.setServerFilename(storedFileName);
+            image.setDeleted(false);
+            return imageRepository.save(image);
+        }).toList();
     }
 
+    @GetMapping("/{facilityId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Map<String, Object>> getAllFacilityImages(@PathVariable Long facilityId) {
+        var images = imageRepository.findByFacilityIdAndIsDeletedFalse(facilityId);
+
+        return images.stream().map(image -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", image.getId());
+            map.put("filename", image.getServerFilename());
+
+            try {
+                // Dobavi bajtove slike iz MinIO
+                byte[] fileBytes = fileService.downloadFile(image.getServerFilename());
+                // Pretvori u Base64 string
+                String base64 = Base64.getEncoder().encodeToString(fileBytes);
+                map.put("base64", "data:image/jpeg;base64," + base64);
+            } catch (Exception e) {
+                map.put("error", "Error reading image: " + e.getMessage());
+            }
+
+            return map;
+        }).toList();
+    }
 
 }

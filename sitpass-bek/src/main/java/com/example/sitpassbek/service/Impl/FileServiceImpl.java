@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.Objects;
 
@@ -90,6 +91,19 @@ public class FileServiceImpl implements FileService {
             return minioClient.getObject(args);
         } catch (Exception e) {
             throw new FileNotFoundException("Document " + serverFilename + " does not exist.");
+        }
+    }
+
+    @Override
+    public byte[] downloadFile(String objectName) {
+        try (InputStream inputStream = minioClient.getObject(
+                GetObjectArgs.builder()
+                        .bucket(bucketName)
+                        .object(objectName)
+                        .build())) {
+            return inputStream.readAllBytes();
+        } catch (Exception e) {
+            throw new RuntimeException("Error while reading file from MinIO: " + objectName, e);
         }
     }
 }

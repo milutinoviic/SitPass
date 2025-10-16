@@ -29,6 +29,7 @@ import { CreateReviewComponent } from './components/create-review/create-review.
 import { FacilityIndexComponent } from './pages/facility-index/facility-index.component';
 import { DocumentFileComponent } from './components/document-file/document-file.component';
 import { SearchComponent } from './components/search/search.component';
+import { FacilityImagesComponent } from './components/facility-images/facility-images.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { SearchComponent } from './components/search/search.component';
     FacilityIndexComponent,
     DocumentFileComponent,
     SearchComponent,
+    FacilityImagesComponent,
    
   ],
   imports: [
